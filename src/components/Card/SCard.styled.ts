@@ -1,9 +1,3 @@
 import styled from 'styled-components';
-
-export const SCard = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 12px;
-`;
+import tw from 'twin.macro';
+import '~antd/dist/antd.css';

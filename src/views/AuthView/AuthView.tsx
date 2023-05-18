@@ -10,10 +10,15 @@ const HomeView = lazy(() => import('../HomeView/HomeView'));
 
 export default function AuthView() {
   return (
-    <Suspense fallback={<div>loading...</div>}>
+    <Suspense
+      fallback={
+        <h2 className='bg-zinc-800 text-white flex justify-center items-center'>
+          loading...
+        </h2>
+      }
+    >
       <Routes>
         <Route element={<AuthLayout />}>
-          <Route path='/homeView' element={<HomeView />}></Route>
           <Route path='/login' element={<LoginView />}></Route>
           <Route path='/register' element={<RegisterView />}></Route>
         </Route>

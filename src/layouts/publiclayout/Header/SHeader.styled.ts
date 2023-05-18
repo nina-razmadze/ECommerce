@@ -1,5 +1,48 @@
+import tw from 'twin.macro';
 import styled from 'styled-components';
 
+export const SLoginLink = styled.link`
+  ${tw`no-underline`}
+`;
+export const SHeaderNav = styled.nav`
+  ${tw` bg-zinc-800  px-4 lg:px-6 py-2.5 fixed   top-0 left-0 w-full bg-white  z-20  mx-auto w-4/5	`}
+`;
+export const SAuthButtons = styled.div`
+  ${tw`flex justify-around items-center lg:order-2 bg-transparent border-none mr-[20px]`}
+`;
+export const SLoginButton = styled.button`
+  ${tw` text-white  bg-zinc-800  dark:bg-zinc-600   border-none	 hover:bg-zinc-600 focus:bg-zinc-600 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2  focus:outline-none 	`}
+`;
+export const SCartIcon = styled.div`
+  ${tw`mr-1.5  w-7 `}
+`;
+
+export const SSimplyBtn = styled.button`
+  ${tw`bg-transparent mr-[60px] border-none text-white flex items-center justify-between  hover:bg-zinc-600 rounded-lg mr-8 p-[5px] `}
+`;
+export const SSEarchAndLangWrapper = styled.div`
+  ${tw`flex justify-between`}
+`;
+export const SCartP = styled.p`
+  ${tw`pr-[6px] `}
+`;
+
+export const SdivContainer = styled.div`
+  ${tw`flex flex-wrap justify-between items-center mx-auto w-[82%]	 `}
+`;
+export const SListUl = styled.ul`
+  ${tw`flex flex-col items-center mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 list-none`}
+`;
+export const SPrimaryButton = styled.button`
+  ${tw`text-white bg-purple-600 hover:bg-purple-700	focus:ring-4  focus:ring-purple-900 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:bg-zinc-600   border-none `}
+`;
+
+export const SLogoSpan = styled.span`
+  ${tw` text-white pl-[20px] absolute top-[20px] left-[50%] self-center text-xl font-semibold whitespace-nowrap dark:text-white`}
+`;
+export const STranslateSelect = styled.select`
+  ${tw`border-none mr-[60px]  px-3 py-2 cursor-pointer bg-transparent text-white hover:bg-zinc-600  rounded-lg items-center`}
+`;
 export const SHeader = styled.header<{ height?: string; width?: string }>`
   display: flex;
   padding: 12px;
@@ -8,15 +51,7 @@ export const SHeader = styled.header<{ height?: string; width?: string }>`
 `;
 
 export const SSearchInput = styled.input`
-  width: 800px;
-  height: 45px;
-  border: none;
-  padding-left: 30px;
-  font-size: 18px;
-  border-radius: 20px;
-  cursor: pointer;
-  border: 3px solid #880ed4;
-  /* margin-left: 120px; */
+  ${tw`w-[612px] h-[45px] pl-[30px] bg-zinc-800 rounded-lg cursor-pointer border-4 border-purple-200 border-y-purple-500  border-x-zinc-800 mr-[50px]  `}
 `;
 export const SSelectOption = styled.select`
   position: absolute;
@@ -28,17 +63,7 @@ export const SSelectOption = styled.select`
   height: 33px;
   cursor: pointer;
 `;
-export const STranslateSelect = styled.select`
-  margin-left: 30px;
-  border: none;
-  border-radius: 15px;
-  width: 65px;
-  padding-left: 3px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  cursor: pointer;
-  border: 3px solid #880ed4;
-`;
+
 export const SPrimaryButtonWrapper = styled.div`
   /* display: flex;
   align-items: center;
@@ -61,16 +86,7 @@ export const SSearchIconWrapper = styled.div`
   top: 25px;
   cursor: pointer;
 `;
-export const SCartIcon = styled.button`
-  background-color: white;
-  width: 50px;
-  margin-left: 30px;
-  height: 50px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  border: 3px solid #880ed4;
-`;
+
 export const SUserICon = styled.div`
   position: absolute;
   top: 29px;

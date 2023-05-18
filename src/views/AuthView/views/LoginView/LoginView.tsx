@@ -1,55 +1,157 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { STransparentBox } from '@src/components/TransparentContainer/STransparentContainer.styled';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
+import { publicAxios } from '@src/utils/publicAxios';
+import { ErrorMessage } from '@hookform/error-message';
+
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
+
+// Styled components
 import {
-  SAuthTitle,
-  SForm,
-  SFormInput,
-  SFormSubmit,
-  SInputError,
+  SAuthLogo,
+  SAuthForm,
+  SAuthSection,
+  SAuthSignInA,
+  SAuthFormDiv,
+  SAuthTitleDiv,
+  SAuthContainer,
+  SAuthFormInput,
+  SAuthFormLabel,
+  SAuthFormHeader,
+  SAuthFormButton,
+  SAuthFormCheckbox,
+  SAuthFormContainer,
+  SAuthDoesNotAccaunt,
+  SAuthForgotPasswordA,
+  SAuthFormCheckboxLabel,
 } from './SLogin.styled';
 
-import { Header } from '@src/layouts/publiclayout/Header';
+import { TlogaclStorage } from '../../../../types/localstorage';
+import { AuthContext, TAuthorizationStage } from '@src/contexts/AuthContext';
 
 type TInputs = {
   email: string;
   password: string;
+  checkbox: string;
+};
+type TloginForm = {
+  password: string;
+  email: string;
 };
 
-export default function LoginView() {
+export default function loginView() {
+  const { formatMessage } = useIntl();
+  const { setStatus } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
-
+    setError,
     formState: { errors },
   } = useForm<TInputs>();
 
-  const onSubmit: SubmitHandler<TInputs> = (data) => console.log(data);
+  const handeLogin = async (data: TloginForm) => {
+    try {
+      const resp = await publicAxios.post(`/auth/login`, data);
+      if (resp.data.accesToken) {
+        localStorage.setItem(TlogaclStorage.ACCESSTOKEN, resp.data.accessToken);
+        setStatus(TAuthorizationStage.AUTHORIZED);
+      }
+    } catch (error: any) {
+      setError('root', { message: 'Something went wrong' });
+    }
+  };
 
   return (
-    <>
-      {/* <Header /> */}
-      <STransparentBox>
-        <SForm onSubmit={handleSubmit(onSubmit)}>
-          <SAuthTitle>ავტორიზაცია</SAuthTitle>
+    //ardagviweros romeli inputia araswori
+    <SAuthSection>
+      <SAuthContainer>
+        <SAuthLogo>
+          {/* <a> */}
+          {/* <SAuthimg src='https://flowbite.s3.amazonaws.com/blocks/marketing-ui/authentication/illustration.svg'></SAuthimg> */}
+          {/* </a> */}
+        </SAuthLogo>
+        <SAuthFormContainer onSubmit={handleSubmit(handeLogin)}>
+          <SAuthFormDiv>
+            <SAuthTitleDiv>
+              <SAuthFormHeader>
+                <FormattedMessage id='Sign in to your account' />
+              </SAuthFormHeader>
+            </SAuthTitleDiv>
 
-          <SFormInput
-            placeholder='ელფოსტა | ტელეფონის ნომერი'
-            {...register('email', { required: true })}
-          />
-          {errors.email && <SInputError>გთხოვთ შეიყვანოთ ემაილი</SInputError>}
+            <SAuthForm>
+              <div>
+                <SAuthFormLabel>
+                  <FormattedMessage id='Your email' />
+                </SAuthFormLabel>
+                <SAuthFormInput
+                  type='email'
+                  id='email'
+                  placeholder={formatMessage({ id: 'name@company.com' })}
+                  {...register('email', { required: true })}
+                />
+                <ErrorMessage errors={errors} name='email'></ErrorMessage>
+              </div>
 
-          <SFormInput
-            placeholder='პაროლი'
-            {...register('password', { required: true })}
-          />
-          {errors.password && (
-            <SInputError>გთხოვთ შეიყვანოთ პაროლი</SInputError>
-          )}
+              <div>
+                <SAuthFormLabel>
+                  <FormattedMessage id='Password' />
+                </SAuthFormLabel>
+                <SAuthFormCheckbox
+                  type='password'
+                  id='password'
+                  placeholder='••••••••'
+                  {...register('password', { required: true })}
+                />
+                <ErrorMessage errors={errors} name='password'></ErrorMessage>
+              </div>
 
-          <SFormSubmit type='submit' />
-        </SForm>
-      </STransparentBox>
-    </>
+              {errors?.root && (
+                <p className='text-red-700'>
+                  <FormattedMessage id='Something went wrong' />
+                </p>
+              )}
+
+              <div className='flex items-center justify-between'>
+                <div className='flex items-start'>
+                  <div className='flex items-center h-5'>
+                    <SAuthFormCheckbox
+                      id='remember'
+                      aria-describedby='remember'
+                      type='checkbox'
+                      {...register('checkbox')}
+                    />
+                  </div>
+
+                  <div className='ml-3 text-sm'>
+                    <SAuthFormCheckboxLabel>
+                      <FormattedMessage id='Remember me' />
+                    </SAuthFormCheckboxLabel>
+                  </div>
+                </div>
+
+                <SAuthForgotPasswordA href='#'>
+                  <FormattedMessage id='Forgot password?' />
+                </SAuthForgotPasswordA>
+              </div>
+
+              <SAuthFormButton type='submit'>
+                <FormattedMessage id='Sign in' />
+              </SAuthFormButton>
+
+              <SAuthDoesNotAccaunt>
+                Don’t have an account yet?
+                <Link to='/auth/register'>
+                  <SAuthSignInA href='#'>
+                    <FormattedMessage id='Register here' />
+                  </SAuthSignInA>
+                </Link>
+              </SAuthDoesNotAccaunt>
+            </SAuthForm>
+          </SAuthFormDiv>
+        </SAuthFormContainer>
+      </SAuthContainer>
+    </SAuthSection>
   );
 }

@@ -1,142 +1,178 @@
-import { STransparentBox } from '@src/components/TransparentContainer/STransparentContainer.styled';
-import { SRadioBtnsWrapper, SSelect } from './SRegister.styled';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { SForm } from '../LoginView/SLogin.styled';
-import { SAuthTitle } from '../LoginView/SLogin.styled';
-import { SFormInput } from '../LoginView/SLogin.styled';
-import { SFormSubmit } from '../LoginView/SLogin.styled';
-import { SInputError } from '../LoginView/SLogin.styled';
-import {
-  SGender,
-  SRadioBtnLabel,
-  SRadioBtnWrapper,
-  SRadioInput,
-} from './SRegister.styled';
+import { useState } from 'react';
+import { useIntl } from 'react-intl';
 
-type TInputs = {
+import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+
+import { publicAxios } from '@src/utils/publicAxios';
+import { ErrorMessage } from '@hookform/error-message';
+
+import { useForm } from 'react-hook-form';
+import { SNamediv, SNamesdiv } from './SRegister.styled';
+
+import { SAuthTitleDiv } from '../LoginView/SLogin.styled';
+
+import {
+  SAuthLogo,
+  SAuthForm,
+  SAuthSection,
+  SAuthSignInA,
+  SAuthFormDiv,
+  SAuthContainer,
+  SAuthFormInput,
+  SAuthFormLabel,
+  SAuthFormHeader,
+  SAuthFormButton,
+  SAuthFormCheckbox,
+  SAuthFormContainer,
+  SAuthDoesNotAccaunt,
+  SAuthFormCheckboxLabel,
+} from '../LoginView/SLogin.styled';
+
+type TregisterForm = {
   email: string;
-  gender: string;
-  password: string;
-  lastname: string;
+  password: any;
   firstname: string;
-  birthdate: string;
-  thelephone: string;
-  repeatpassword: string;
-  for: string;
+  lastname: string;
+  checkbox: string;
 };
 export default function RegisterView() {
+  const { formatMessage } = useIntl();
+  const [created, setCreated] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
-
+    setError,
     formState: { errors },
-  } = useForm<TInputs>();
+  } = useForm<TregisterForm>();
 
-  const onSubmit: SubmitHandler<TInputs> = (data) => console.log(data);
+  async function handleRegister(data: TregisterForm) {
+    console.log(data);
+    try {
+      const resp = await publicAxios.post(
+        `
+      /register`,
+        data
+      );
+      if (resp.data?.id) {
+        setCreated(true);
+      }
+    } catch (error: any) {
+      setError('root', { message: error.response.data.errors?.[0].msg });
+    }
+  }
 
   return (
     <>
-      <STransparentBox>
-        <SForm onSubmit={handleSubmit(onSubmit)}>
-          <SAuthTitle>რეგისტრაცია</SAuthTitle>
-          {/* <SFlexInputWrapper> */}
+      <SAuthSection>
+        <SAuthContainer>
+          <SAuthLogo>
+            {/* <SAuthimg src='https://flowbite.s3.amazonaws.com/blocks/marketing-ui/authentication/illustration.svg'></SAuthimg> */}
+          </SAuthLogo>
+          <SAuthFormContainer onSubmit={handleSubmit(handleRegister)}>
+            <SAuthFormDiv>
+              <SAuthTitleDiv>
+                <SAuthFormHeader>
+                  <FormattedMessage id='Create an account' />
+                </SAuthFormHeader>
+              </SAuthTitleDiv>
+              <SAuthForm>
+                <SNamesdiv>
+                  <SNamediv>
+                    <SAuthFormLabel>
+                      <FormattedMessage id='Firstname' />
+                    </SAuthFormLabel>
+                    <SAuthFormInput
+                      type='text'
+                      id='fistname'
+                      placeholder={formatMessage({ id: 'firstname' })}
+                      {...register('firstname', { required: true })}
+                    />
+                    <ErrorMessage errors={errors} name='email'></ErrorMessage>
+                  </SNamediv>
+                  <div>
+                    <SAuthFormLabel>
+                      <FormattedMessage id='Lastname' />
+                    </SAuthFormLabel>
+                    <SAuthFormInput
+                      type='text'
+                      id='lastname'
+                      placeholder={formatMessage({ id: 'lastname' })}
+                      {...register('lastname', { required: true })}
+                    />
+                    <ErrorMessage errors={errors} name='email'></ErrorMessage>
+                  </div>
+                </SNamesdiv>
 
-          <SFormInput
-            placeholder='სახელი'
-            {...register('firstname', { required: true })}
-          ></SFormInput>
+                <div>
+                  <SAuthFormLabel>
+                    <FormattedMessage id='Your email' />
+                  </SAuthFormLabel>
+                  <SAuthFormInput
+                    type='email'
+                    id='email'
+                    placeholder='name@company.com'
+                    {...register('email', { required: true })}
+                  />
+                  <ErrorMessage errors={errors} name='email'></ErrorMessage>
+                </div>
 
-          {errors.firstname && (
-            <SInputError>გთხოვთ შეიყვანოთ სახელი</SInputError>
-          )}
+                <div>
+                  <SAuthFormLabel>
+                    <FormattedMessage id='Password' />
+                  </SAuthFormLabel>
+                  <SAuthFormCheckbox
+                    type='password'
+                    id='password'
+                    placeholder='••••••••'
+                    {...register('password', { required: true })}
+                  />
+                  <ErrorMessage errors={errors} name='password'></ErrorMessage>
+                </div>
+                {errors?.root && <p>{errors.root.message}</p>}
 
-          <SFormInput
-            placeholder='გვარი'
-            {...register('lastname', { required: true })}
-          ></SFormInput>
+                <div className='flex items-center justify-between'>
+                  <div className='flex items-start'>
+                    <div className='flex items-center h-5'>
+                      <SAuthFormCheckbox
+                        id='remember'
+                        aria-describedby='remember'
+                        type='checkbox'
+                        {...register('checkbox')}
+                      />
+                    </div>
 
-          {errors.lastname && <SInputError>გთხოვთ შეიყვანოთ გვარი</SInputError>}
+                    <div className='ml-3 text-sm'>
+                      <SAuthFormCheckboxLabel>
+                        <FormattedMessage id='I accept the Terms and Conditions' />
+                      </SAuthFormCheckboxLabel>
+                    </div>
+                  </div>
+                </div>
 
-          <SFormInput
-            placeholder='ელფოსტა'
-            {...register('email', { required: true })}
-          />
-          {errors.email && <SInputError>გთხოვთ შეიყვანოთ ემაილი</SInputError>}
+                <SAuthFormButton type='submit'>
+                  <FormattedMessage id='Create an account' />
+                </SAuthFormButton>
 
-          <SFormInput
-            placeholder='პაროლი'
-            type='password'
-            {...register('password', { required: true })}
-          />
-          {errors.password && (
-            <SInputError>გთხოვთ შეიყვანოთ პაროლი</SInputError>
-          )}
+                <SAuthDoesNotAccaunt>
+                  <FormattedMessage id='Already have an account?' />
 
-          <SFormInput
-            placeholder=' გაიმეორეთ პაროლი'
-            type='password'
-            {...register('repeatpassword', { required: true })}
-          />
-          {errors.repeatpassword && (
-            <SInputError>გთხოვთ გაიმეოროთ პაროლი</SInputError>
-          )}
-
-          <SGender>სქესი</SGender>
-
-          <SRadioBtnsWrapper>
-            <SRadioBtnWrapper>
-              <SRadioInput
-                type='radio'
-                id='მდედრობითი'
-                name='gender'
-                value='მდედრობითი'
-              />
-              <SRadioBtnLabel htmlFor='მდედრობით'>მდედრობითი</SRadioBtnLabel>
-            </SRadioBtnWrapper>
-
-            <SRadioBtnWrapper>
-              <SRadioInput
-                type='radio'
-                id='მამრობითი'
-                name='gender'
-                value='მამრობითი'
-              />
-              <SRadioBtnLabel htmlFor='მამრობითი'>მამრობითი</SRadioBtnLabel>
-            </SRadioBtnWrapper>
-          </SRadioBtnsWrapper>
-
-          {errors.gender && <SInputError>გთხოვთ შეიყვანოთ სქესი</SInputError>}
-
-          <SSelect {...register('birthdate', { required: true })}>
-            <option value='' disabled selected>
-              აირჩიე დაბადების წელი
-            </option>
-            <option value='2000'>2000</option>
-            <option value='2001'>2001</option>
-            <option value='2002'>2002</option>
-            <option value='2003'>2003</option>
-            <option value='2004'>2004</option>
-            <option value='2005'>2005</option>
-            <option value='2006'>2006</option>
-            <option value='2007'>2007</option>
-          </SSelect>
-
-          {errors.birthdate && (
-            <SInputError>გთხოვთ შეიყვანოთ დაბადების თარიღი</SInputError>
-          )}
-
-          <SFormInput
-            placeholder='ტელეფონის ნომერი'
-            {...register('thelephone', { required: true })}
-          ></SFormInput>
-
-          {errors.thelephone && (
-            <SInputError>გთხოვთ შეიყვანოთ ტელეფონის ნომერი</SInputError>
-          )}
-
-          <SFormSubmit type='submit' />
-        </SForm>
-      </STransparentBox>
+                  <Link to='/auth/login'>
+                    <SAuthSignInA href='#'>
+                      <FormattedMessage id='Login here' />
+                    </SAuthSignInA>
+                  </Link>
+                </SAuthDoesNotAccaunt>
+                {created && (
+                  <p className=' mt-2 text-green-700'>
+                    <FormattedMessage id='User created successfully' />
+                  </p>
+                )}
+              </SAuthForm>
+            </SAuthFormDiv>
+          </SAuthFormContainer>
+        </SAuthContainer>
+      </SAuthSection>
     </>
   );
 }

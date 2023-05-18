@@ -1,4 +1,12 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
+
+export const SNamesdiv = styled.div`
+  ${tw`flex `}
+`;
+export const SNamediv = styled.div`
+  ${tw`mr-3`}
+`;
 
 export const SSelect = styled.select`
   padding: 12px;

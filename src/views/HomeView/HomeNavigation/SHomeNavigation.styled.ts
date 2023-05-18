@@ -7,6 +7,7 @@ export const SHomeNavigation = styled.nav`
   margin-top: 0px;
   width: 300px;
   height: 500px;
+  color: white;
   background-color: #880ed4;
   border-radius: 10px;
 `;
@@ -16,6 +17,7 @@ export const SNavHeader = styled.div`
   width: 300px;
   display: flex;
   align-items: center;
+  padding-left: 12px;
   font-size: 20px;
   background-color: #6300a9;
 `;
@@ -23,6 +25,7 @@ export const SNavListItem = styled.div`
   padding: 15px;
   font-size: 18px;
   display: flex;
+  align-items: center;
   cursor: pointer;
   &:hover {
     background-color: #6300a9;
@@ -30,5 +33,5 @@ export const SNavListItem = styled.div`
 `;
 
 export const SListTitle = styled.p`
-  padding-left: 15px;
+  padding-left: 14px;
 `;

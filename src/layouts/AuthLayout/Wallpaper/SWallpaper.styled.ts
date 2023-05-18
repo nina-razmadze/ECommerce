@@ -1,4 +1,3 @@
-import { STransparentBox } from '@src/components/TransparentContainer/STransparentContainer.styled';
 import styled from 'styled-components';
 
 export const SwallpaperContainer = styled.div`

@@ -5,6 +5,7 @@ export const SPrimaryButton = styled.button`
   padding: 10px;
   border-radius: 10px;
   font-size: 15px;
+  color: white;
   border: none;
   border: 3px solid #880ed4;
   cursor: pointer;

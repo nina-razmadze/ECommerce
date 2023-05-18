@@ -2,6 +2,7 @@ import { SHomeNavigation } from './SHomeNavigation.styled';
 import { SNavHeader } from './SHomeNavigation.styled';
 import { SNavListItem } from './SHomeNavigation.styled';
 import { SListTitle } from './SHomeNavigation.styled';
+import { FormattedMessage } from 'react-intl';
 
 import { FaMobileAlt } from 'react-icons/fa';
 import { ImHeadphones } from 'react-icons/im';
@@ -14,42 +15,70 @@ import { IoMdList } from 'react-icons/io';
 
 export default function HomeNavigation() {
   return (
-    <SHomeNavigation>
+    <SHomeNavigation
+      className='font-sans
+
+'
+    >
       <SNavHeader>
         <IoMdList size={30} />
-        <SListTitle>ჩამონათვალი</SListTitle>
+        <SListTitle>
+          <FormattedMessage id='List' />
+        </SListTitle>
       </SNavHeader>
       <div>
         <SNavListItem>
-          <FaMobileAlt size={20} /> <SListTitle>მობილურები</SListTitle>
+          <FaMobileAlt size={20} />
+          <SListTitle>
+            <FormattedMessage id='Mobile phones' />
+          </SListTitle>
         </SNavListItem>
 
         <SNavListItem>
           <ImHeadphones size={20} />
-          <SListTitle>ტაბები | აქსესუარები </SListTitle>
+          <SListTitle>
+            <FormattedMessage id='Tabs' /> <span> | </span>
+            <FormattedMessage id='Accessories' />
+          </SListTitle>
         </SNavListItem>
 
         <SNavListItem>
-          <MdLaptopChromebook size={20} />{' '}
-          <SListTitle>ლეპტოპები | IT</SListTitle>
+          <MdLaptopChromebook size={20} />
+          <SListTitle>
+            <FormattedMessage id='Leptops' /> <span> | </span> IT
+          </SListTitle>
         </SNavListItem>
 
         <SNavListItem>
-          <MdAudiotrack size={20} /> <SListTitle>აუდიო სისტემა</SListTitle>
+          <MdAudiotrack size={20} />{' '}
+          <SListTitle>
+            <FormattedMessage id='Audio system' />
+          </SListTitle>
         </SNavListItem>
 
         <SNavListItem>
-          <TbDeviceGamepad2 size={20} /> <SListTitle>Gaming</SListTitle>
+          <TbDeviceGamepad2 size={20} />
+          <SListTitle>
+            <FormattedMessage id='Gaming' />
+          </SListTitle>
         </SNavListItem>
 
         <SNavListItem>
           <MdOutlineScreenshotMonitor size={20} />
-          <SListTitle>ტელევიზორი | მონიტორი </SListTitle>
+          <SListTitle>
+            <FormattedMessage id='TV' /> <span> | </span>
+            <FormattedMessage id='Monitor' />
+          </SListTitle>
         </SNavListItem>
 
         <SNavListItem>
           <BsCameraFill size={20} />
-          <SListTitle>ფოტო | ვიდეო | ოპტიკა</SListTitle>
+          <SListTitle>
+            <FormattedMessage id='Photo' /> <span> | </span>
+            <FormattedMessage id='Video' />
+            <span> | </span>
+            <FormattedMessage id='Optics' />
+          </SListTitle>
         </SNavListItem>
       </div>
     </SHomeNavigation>

@@ -1,6 +1,5 @@
-// import { Header } from '@src/layouts/publiclayout/Header';
-import { PublicLayouts } from '@src/layouts/publiclayout';
 import { lazy, Suspense } from 'react';
+import { SearchProduct } from './searchProduct';
 
 const HomeNavigation = lazy(() => import('./HomeNavigation'));
 const HomeContent = lazy(() => import('./HomeContent'));
