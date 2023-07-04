@@ -1,21 +1,62 @@
-interface CardProps {
+import { useContext, useEffect } from 'react';
+import { SubmitHandler } from 'react-hook-form';
+import { CartContext } from '@src/contexts/CartContext';
+import { ProductContext } from '@src/contexts/ProductContext';
+
+export interface CardProps {
+  id: any;
   desc: string;
-  price: number;
+  price: string;
   title: string;
-  images: any[];
+  images: string[];
+  category: string;
+  product: number | string;
 }
 
-export function Card({ title, desc, price, images }: CardProps) {
+export function Card({
+  desc,
+  price,
+  title,
+  images,
+  id,
+  product,
+  category,
+}: CardProps) {
+  const { cartItem, setCartItem } = useContext(CartContext);
+  // const { productInfo, setProductInfo } = useContext(ProductContext);
+
+  const onSubmit: SubmitHandler<CardProps> = (data) => {
+    setCartItem((prev) => [...prev, data]);
+  };
+
+  const handleClick = () => {
+    onSubmit({ price, title, images, desc, id, product, category });
+  };
+  // ---------------------------------------------------
+  // const onClick: SubmitHandler<Product> = (data) => {
+  //   setProductInfo(exampleProduct);
+  // };
+
+  // const handleCardClick = () => {
+  //   const newProductInfo: Product = {
+  //     category: '',
+  //     product: '',
+  //     title: title,
+  //   };
+
+  //   setProductInfo(newProductInfo);
+  // };
+
   return (
     <>
       {images.map((image, index) => (
         <div
-          key={index}
-          className='max-w-sm cursor-pointer  w-[275px] border rounded-lg border-gray-200 overflow-hidden shadow-lg'
+          key={id}
+          className=' max-w-sm cursor-pointer hover:opacity-70 	 w-[275px] border	 rounded-lg border-gray-200 overflow-hidden shadow-lg'
         >
           <a href='#'>
             <img
-              className='w-full h-[180px]  object-cover '
+              className='w-full h-[180px] object-cover opacity-100 transition-opacity duration-300 '
               src={image}
               alt={`Image ${index + 1}`}
             />
@@ -85,12 +126,12 @@ export function Card({ title, desc, price, images }: CardProps) {
               <span className='text-3xl font-bold text-gray-900 dark:text-white'>
                 ${price}
               </span>
-              <a
-                href='#'
+              <button
+                onClick={handleClick}
                 className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
                 Add to cart
-              </a>
+              </button>
             </div>
           </div>
         </div>

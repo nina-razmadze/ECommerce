@@ -5,8 +5,7 @@ import { lazy, Suspense, useCallback, useContext } from 'react';
 
 import { PriviteLayout } from './layouts/priviteLayout/PriviteLayout';
 import { AuthContext, TAuthorizationStage } from './contexts/AuthContext';
-import { CartModal } from './components/CartModal';
-import { useState } from 'react';
+import UserView from './views/UserView/UserView';
 
 const HomeView = lazy(() => import('./views/HomeView'));
 const AuthView = lazy(() => import('./views/AuthView'));
@@ -14,8 +13,13 @@ const AuthView = lazy(() => import('./views/AuthView'));
 const ProductView = lazy(() => import('./views/ProductView'));
 const ProductsView = lazy(() => import('./views/ProductsView'));
 
+const ContactView = lazy(() => import('./views/ContactView/ContactView'));
+const PeymentView = lazy(() => import('./views/PaymentView/PeymentView'));
+
+const EditReportView = lazy(
+  () => import('./views/EditReportView/EditReportView')
+);
 function App() {
-  const [cartModal, setcartModal] = useState<boolean>(true);
   const { status } = useContext(AuthContext);
   const handleRoutes = useCallback((status: TAuthorizationStage) => {
     switch (status) {
@@ -33,11 +37,15 @@ function App() {
         return (
           <Routes>
             <Route element={<PublicLayouts />}>
+              <Route path='/editReport' element={<EditReportView />} />
+              <Route path='/pay' element={<PeymentView />} />
+              <Route path='/user' element={<UserView />} />
               <Route path='/' element={<HomeView />} />
               <Route path='/Products/:id' element={<ProductView />} />
               <Route path='/Products' element={<ProductsView />} />
             </Route>
             <Route path='/auth/*' element={<AuthView />} />
+            <Route path='/Contact' element={<ContactView />} />
           </Routes>
         );
       }
@@ -48,7 +56,6 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         {handleRoutes(status)}
       </Suspense>
-      <CartModal open={cartModal} onClose={() => setcartModal(false)} />
     </>
   );
 }

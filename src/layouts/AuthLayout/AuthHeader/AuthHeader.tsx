@@ -26,20 +26,6 @@ export default function AuthHeader() {
           <SLogoSpan>EShop</SLogoSpan>
         </Link>
         <SAuthButtons>
-          <li>
-            <STranslateSelect
-              onChange={(e) => setLocale(e.target.value as Language)}
-              value={locale}
-            >
-              <option value='ENG'>
-                <FormattedMessage id='ENG' />
-              </option>
-              <option value='GEO'>
-                <FormattedMessage id='GEO' />
-              </option>
-            </STranslateSelect>
-          </li>
-
           <SPrimaryButton>
             <Link to='/'>
               <FormattedMessage id='Home'></FormattedMessage>

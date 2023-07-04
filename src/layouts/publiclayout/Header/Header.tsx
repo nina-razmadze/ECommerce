@@ -24,17 +24,27 @@ import { SCartIcon } from './SHeader.styled';
 import { SHeaderNav } from './SHeader.styled';
 import { SSimplyBtn } from './SHeader.styled';
 import { FormattedMessage } from 'react-intl';
-
+import { CartModal } from '@src/components/CartModal';
 import { SSearchInput } from './SHeader.styled';
 import { SPrimaryButton } from './SHeader.styled';
 import { STranslateSelect } from './SHeader.styled';
 import { Language } from '../../../types/localstorage';
-
+import { SContactUS } from './SHeader.styled';
 import { LocaleContext } from '@src/contexts/LocaleContext';
 import GroceryCart from '.././../../images/grocery-cart.png';
+import { CartContext } from '@src/contexts/CartContext';
+import { useGetProducts } from '@src/hooks/useGetProducts';
+import UserView from '@src/views/UserView/UserView';
 
 export function Header() {
+  const { cartItem, setCartItem } = useContext(CartContext);
+
+  const [cartModal, setcartModal] = useState<boolean>(false);
   const { locale, setLocale } = useContext(LocaleContext);
+  const {
+    products: { data, loading },
+  } = useGetProducts();
+
   return (
     <>
       <SHeaderNav>
@@ -42,6 +52,9 @@ export function Header() {
           <SSearchInput placeholder='Search'></SSearchInput>
 
           <SAuthButtons>
+            <Link to='/Contact'>
+              <SContactUS>Contact</SContactUS>
+            </Link>
             <STranslateSelect
               onChange={(e) => {
                 localStorage.setItem('locale', e.target.value);
@@ -56,17 +69,23 @@ export function Header() {
                 <FormattedMessage id='GEO' />
               </option>
             </STranslateSelect>
-            <Link to='/Cart'>
-              <SSimplyBtn>
-                <SCartIcon>
-                  <img src={GroceryCart}></img>
-                </SCartIcon>
-                <SCartP>
-                  <FormattedMessage id='cart' />
-                </SCartP>
-              </SSimplyBtn>
+            <Link to='/user'>
+              <div className='pr-[24px]'>My page</div>
             </Link>
+            <SSimplyBtn onClick={() => setcartModal(true)}>
+              <SCartIcon>
+                <img src={GroceryCart}></img>
+              </SCartIcon>
+              <SCartP>
+                <FormattedMessage id='cart' />
+              </SCartP>
+            </SSimplyBtn>
 
+            <CartModal
+              cartItem={cartItem}
+              open={cartModal}
+              onClose={() => setcartModal(false)}
+            />
             <Link to='/auth/login'>
               <SPrimaryButton>
                 <FormattedMessage id='Log in' />

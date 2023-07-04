@@ -12,7 +12,7 @@ export default function AuthView() {
   return (
     <Suspense
       fallback={
-        <h2 className='bg-zinc-800 text-white flex justify-center items-center'>
+        <h2 className='bg-zinc-800 w-full flex items-center text-white flex justify-center '>
           loading...
         </h2>
       }

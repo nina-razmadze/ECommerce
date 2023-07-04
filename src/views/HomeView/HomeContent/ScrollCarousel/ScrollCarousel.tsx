@@ -6,11 +6,15 @@ export function ScrollCarousel() {
     id: number;
     title: string;
     images: string[];
-    price: number;
+    price: string;
     description: string;
+    category: string;
+    product: string | number;
   }
+
   const [data, setData] = useState<CardData[]>([]);
   const [offset, setOffset] = useState(0);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,11 +22,8 @@ export function ScrollCarousel() {
           `https://dummyjson.com/products?offset=${offset}&limit=5`
         );
         const fetchdata = await res.json();
-        setData((pre) => [...pre, ...fetchdata.products]);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
+        setData((prev) => [...prev, ...fetchdata.products]);
+      } catch (error) {}
     };
     fetchData();
   }, [offset]);
@@ -45,11 +46,14 @@ export function ScrollCarousel() {
       {data.map((product) => {
         return (
           <Card
+            id={product.id}
             key={product.id}
             title={product.title}
             desc={product.description}
             images={product.images}
+            category={product.category}
             price={product.price}
+            product={product.product}
           />
         );
       })}

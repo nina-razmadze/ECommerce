@@ -28,7 +28,7 @@ export const SCartP = styled.p`
 `;
 
 export const SdivContainer = styled.div`
-  ${tw`flex flex-wrap justify-between items-center mx-auto w-[82%]	 `}
+  ${tw`flex text-white font-[17px] flex-wrap justify-between items-center mx-auto w-[82%]	 `}
 `;
 export const SListUl = styled.ul`
   ${tw`flex flex-col items-center mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 list-none`}
@@ -43,6 +43,10 @@ export const SLogoSpan = styled.span`
 export const STranslateSelect = styled.select`
   ${tw`border-none mr-[60px]  px-3 py-2 cursor-pointer bg-transparent text-white hover:bg-zinc-600  rounded-lg items-center`}
 `;
+export const SContactUS = styled.div`
+  ${tw`text-white  mr-[50px] cursor-pointer bg-transparent text-white hover:bg-zinc-600 p-[7px]  rounded-lg items-center`}
+`;
+
 export const SHeader = styled.header<{ height?: string; width?: string }>`
   display: flex;
   padding: 12px;

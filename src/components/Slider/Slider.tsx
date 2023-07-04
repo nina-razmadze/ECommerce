@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   SHomeContent,
   SBsChevronCompactLeft,
@@ -52,6 +52,16 @@ export function Slider() {
       url: 'https://images.pond5.com/4k-matrix-style-binary-codeseamless-088649879_prevstill.jpeg',
     },
   ];
+  // useEffect(() => {
+  //   const sliderInterval = setInterval(() => {
+  //     nextSlide();
+  //   }, 5000);
+
+  //   return () => {
+  //     clearInterval(sliderInterval);
+  //   };
+  // }, []);
+
   return (
     <>
       <SHomeContent
