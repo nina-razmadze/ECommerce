@@ -1,7 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { CartContext } from '@src/contexts/CartContext';
 import { ProductContext } from '@src/contexts/ProductContext';
+import { BsFillSuitHeartFill } from 'react-icons/bs';
+import { AiFillEdit } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 export interface CardProps {
   id: any;
@@ -23,8 +26,8 @@ export function Card({
   category,
 }: CardProps) {
   const { cartItem, setCartItem } = useContext(CartContext);
+  const [isFavorite, setIsFavorite] = useState(false);
   // const { productInfo, setProductInfo } = useContext(ProductContext);
-
   const onSubmit: SubmitHandler<CardProps> = (data) => {
     setCartItem((prev) => [...prev, data]);
   };
@@ -32,6 +35,7 @@ export function Card({
   const handleClick = () => {
     onSubmit({ price, title, images, desc, id, product, category });
   };
+
   // ---------------------------------------------------
   // const onClick: SubmitHandler<Product> = (data) => {
   //   setProductInfo(exampleProduct);
@@ -52,7 +56,7 @@ export function Card({
       {images.map((image, index) => (
         <div
           key={id}
-          className=' max-w-sm cursor-pointer hover:opacity-70 	 w-[275px] border	 rounded-lg border-gray-200 overflow-hidden shadow-lg'
+          className=' max-w-sm cursor-pointer hover:opacity-70 	w-[275px] border	 rounded-lg border-gray-200 overflow-hidden shadow-lg'
         >
           <a href='#'>
             <img
@@ -131,6 +135,9 @@ export function Card({
                 className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
                 Add to cart
+              </button>
+              <button>
+                <BsFillSuitHeartFill onClick={handleClick} />
               </button>
             </div>
           </div>

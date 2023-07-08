@@ -14,7 +14,6 @@ export function ScrollCarousel() {
 
   const [data, setData] = useState<CardData[]>([]);
   const [offset, setOffset] = useState(0);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

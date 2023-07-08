@@ -4,6 +4,7 @@ import { SCartItem } from './CartModal.styled';
 import { SCartImgWrapper } from './CartModal.styled';
 import { CartContext } from '@src/contexts/CartContext';
 import { Link } from 'react-router-dom';
+
 export interface CardProps {
   id: any;
   desc: string;

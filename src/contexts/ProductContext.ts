@@ -2,8 +2,11 @@ import { createContext } from 'react';
 
 export interface Product {
   category: string;
-  product: number | string;
   title: string;
+  price: number;
+  description: string;
+  color: string;
+  brand: string;
 }
 
 export interface ProductContextValue {
@@ -13,9 +16,12 @@ export interface ProductContextValue {
 
 export const ProductContext = createContext<ProductContextValue>({
   productInfo: {
+    brand: '',
+    description: '',
+    price: 0,
     category: '',
-    product: '',
     title: '',
+    color: '',
   },
   setProductInfo: () => {},
 });

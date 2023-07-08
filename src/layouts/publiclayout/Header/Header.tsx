@@ -17,7 +17,7 @@ import {
 } from './SHeader.styled';
 
 import { useContext } from 'react';
-
+import Search from './Search/Search';
 import { Link } from 'react-router-dom';
 import { SCartP } from './SHeader.styled';
 import { SCartIcon } from './SHeader.styled';
@@ -49,12 +49,13 @@ export function Header() {
     <>
       <SHeaderNav>
         <SdivContainer>
-          <SSearchInput placeholder='Search'></SSearchInput>
+          <Search />
 
           <SAuthButtons>
             <Link to='/Contact'>
               <SContactUS>Contact</SContactUS>
             </Link>
+
             <STranslateSelect
               onChange={(e) => {
                 localStorage.setItem('locale', e.target.value);
@@ -65,17 +66,21 @@ export function Header() {
               <option value={Language.EN}>
                 <FormattedMessage id='ENG' />
               </option>
+
               <option value={Language.GE}>
                 <FormattedMessage id='GEO' />
               </option>
             </STranslateSelect>
+
             <Link to='/user'>
               <div className='pr-[24px]'>My page</div>
             </Link>
+
             <SSimplyBtn onClick={() => setcartModal(true)}>
               <SCartIcon>
                 <img src={GroceryCart}></img>
               </SCartIcon>
+
               <SCartP>
                 <FormattedMessage id='cart' />
               </SCartP>
@@ -86,6 +91,7 @@ export function Header() {
               open={cartModal}
               onClose={() => setcartModal(false)}
             />
+
             <Link to='/auth/login'>
               <SPrimaryButton>
                 <FormattedMessage id='Log in' />
@@ -93,6 +99,7 @@ export function Header() {
             </Link>
           </SAuthButtons>
         </SdivContainer>
+
         <Link to='/'>
           <SLogoSpan>EShop</SLogoSpan>
         </Link>
