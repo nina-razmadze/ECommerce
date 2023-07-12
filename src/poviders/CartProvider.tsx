@@ -10,7 +10,6 @@ interface CardProps {
   title: string;
   images: any[];
 }
-
 export default function CartProvider({
   children,
 }: {

@@ -10,7 +10,7 @@ import { CartContext } from '@src/contexts/CartContext';
 import { ProductContext } from '@src/contexts/ProductContext';
 import axios from 'axios';
 import { useEffect } from 'react';
-
+import { FormattedMessage, useIntl } from 'react-intl';
 interface IFormInput {
   title: string;
   color: any;
@@ -30,6 +30,7 @@ interface EditProductViewProps {
 }
 
 export default function EditProductForm() {
+  const intl = useIntl();
   const { productInfo, setProductInfo } = useContext(ProductContext);
   const { register, handleSubmit, reset, resetField, setValue } =
     useForm<IFormInput>();
@@ -85,38 +86,46 @@ export default function EditProductForm() {
     setValue('price', productInfo.price);
     setValue('description', productInfo.description);
     setValue('category', productInfo.category);
-    setValue('color', 'gray');
-    setValue('brand', 'Apple');
+    setValue('color', '');
+    setValue('brand', '');
   }, [productInfo]);
 
   return (
     <div>
-      <div className='pt-[95px] pb-[171px] text-white  bg-zinc-800 grid justify-center'>
+      <div className='pt-[70px] text-white  bg-zinc-800 grid justify-center'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='flex'>
-            <h1 className='text-[28px] text-white pb-[30px] pt-[25px] '>
-              Edit a Product
+            <h1 className='text-[28px] text-white pb-[30px] pt-[20px] '>
+              <FormattedMessage id='Edit a Product' />
             </h1>
           </div>
           <div>
             <div className='text-white text-[20px] block mb-2'>
               <div>
-                <label className='block mb-2'>Product Name</label>
+                <label className='block mb-2'>
+                  <FormattedMessage id='Product Name' />
+                </label>
                 <SProductInput {...register('title')} />
               </div>
             </div>
           </div>
           <div className=' text-white text-[20px] grid grid-cols-2'>
             <div>
-              <label className='block mb-2'>color</label>
+              <label className='block mb-2'>
+                <FormattedMessage id='Color' />
+              </label>
               <SSecondProductInput {...register('color')} />
             </div>
             <div>
-              <label className='block mb-2'>Brand</label>
+              <label className='block mb-2'>
+                <FormattedMessage id='Brand' />
+              </label>
               <SSecondProductInput {...register('brand')} />
             </div>
             <div>
-              <label className='block mb-1'> Price</label>
+              <label className='block mb-1'>
+                <FormattedMessage id='Price' />
+              </label>
               <SSecondProductInput
                 {...register('price', {
                   pattern: {
@@ -127,13 +136,15 @@ export default function EditProductForm() {
               />
             </div>
             <div>
-              <label className='block mb-1'>Category</label>
+              <label className='block mb-1'>
+                <FormattedMessage id='Category' />
+              </label>
               <SSecondProductInput {...register('category')} />
             </div>
           </div>
           <div>
             <label className='block mb-2 text-white text-[20px]'>
-              Description
+              <FormattedMessage id='Description' />
             </label>
             <SDescriptionInput {...register('description')} />
           </div>
@@ -144,7 +155,7 @@ export default function EditProductForm() {
             <input
               className='bg-purple-700 cursor-pointer  ml-[20px] text-white text-[20px] p-[10px] w-[200px] h-[50px] rounded-lg'
               type='submit'
-              value='Apdate  User'
+              value={intl.formatMessage({ id: 'Update Product' })}
             />
 
             <div className='text-[22px] text-purple-600 pt-[10px]' role='alert'>

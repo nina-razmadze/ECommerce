@@ -12,6 +12,13 @@ import ProductNav from './ProductNavigation/ProductNav';
 import { useContext } from 'react';
 import { CartContext } from '@src/contexts/CartContext';
 import { ProductContext } from '@src/contexts/ProductContext';
+import { FormattedMessage } from 'react-intl';
+import { useEffect, useState } from 'react';
+import phone1 from '../../images/download.jpg';
+import phone2 from '../../images/tele.jpg';
+import phone3 from '../../images/images.jpg';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export interface CardProps {
   id: any;
@@ -19,6 +26,15 @@ export interface CardProps {
   price: string;
   title: string;
   images: string[];
+  category: string;
+  product: string | number;
+}
+export interface CardData {
+  id: number;
+  title: string;
+  images: string[];
+  price: number;
+  description: string;
   category: string;
   product: string | number;
 }
@@ -33,37 +49,61 @@ export interface NavProps {
 }
 
 export default function ProductView() {
-  // const { productInfo, setProductInfo } = useContext(ProductContext);
-  const { cartItem, setCartItem } = useContext(CartContext);
+  const { id } = useParams();
+  const [data, setData] = useState<CardData | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://dummyjson.com/products/${id}`);
+        const productData = await response.json();
+        console.log(data?.images);
+        setData(productData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <SProductViewBackground>
-      <ProductNav cartItem={cartItem} />
-
+      <ProductNav />
       <SProductViewContainer>
         <SProductViewInfoContainerSecond>
-          <SProductViewInfoTitle>Product Brend</SProductViewInfoTitle>
+          <SProductViewInfoTitle>{data.title}</SProductViewInfoTitle>
+          {/* <SProductViewInfoniscription>
+            <FormattedMessage id='Screen Size :' />
+          </SProductViewInfoniscription> */}
           <SProductViewInfoniscription>
-            Screen Size :
+            {data.category}
           </SProductViewInfoniscription>
           <SProductViewInfoMoreImages>
-            <div>first</div>
-            <div>second</div>
-            <div>third</div>
+            <img className='w-[100px] h-[120px]' src={phone1}></img>
+            <img className='w-[100px] h-[120px]' src={phone2}></img>
+            <img className='w-[100px]  h-[120px]' src={phone3}></img>
           </SProductViewInfoMoreImages>
         </SProductViewInfoContainerSecond>
         <SProductViewImageDiv>
+          {/* {data?.images?.map((image: any, index: any) => (
+            <img
+              className='w-[400px]'
+              src={image.source}
+              alt={`Product Image ${index}`}
+              key={index}
+            />
+          ))} */}
           <img src={watch} className='w-[400px]'></img>
         </SProductViewImageDiv>
         <SProductViewInfoContainer>
           <SProductViewInfonNormiscription>
-            info ---------------- 256 GB
+            <FormattedMessage id='Price' /> ---------------- {data.price}
+            <FormattedMessage id='Gel' />
           </SProductViewInfonNormiscription>
-          <SProductViewInfonNormiscription>
-            Operation Sistem ---------------- 16 GB
-          </SProductViewInfonNormiscription>
-          <SProductViewInfonNormiscription>
-            Price ---------------- 2 299 ₾
-          </SProductViewInfonNormiscription>
+          <div className='pt-[160px] '> ----- {data.description}</div>
         </SProductViewInfoContainer>
       </SProductViewContainer>
     </SProductViewBackground>

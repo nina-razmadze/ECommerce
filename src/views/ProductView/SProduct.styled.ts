@@ -2,7 +2,7 @@ import tw from 'twin.macro';
 import styled from 'styled-components';
 
 export const SProductViewBackground = styled.div`
-  ${tw` bg-zinc-800 pb-[38px]  pt-[180px] text-white  `}
+  ${tw` bg-zinc-800 pb-[33px]  pt-[142px] text-white  `}
 `;
 export const SProductViewImageDiv = styled.div`
   ${tw`   flex  h-[498px] w-[500px] rounded-xl  `}
@@ -14,7 +14,7 @@ export const SProductViewInfoniscription = styled.h1`
   ${tw`text-2xl	font-serif  	pt-[40px] `}
 `;
 export const SProductViewInfonNormiscription = styled.h1`
-  ${tw`text-[20px]			font-serif  pb-[20px]`}
+  ${tw`text-[20px]			font-serif  `}
 `;
 export const SProductViewInfoMoreImages = styled.div`
   ${tw`grid grid-cols-3	 pt-[160px]  `}

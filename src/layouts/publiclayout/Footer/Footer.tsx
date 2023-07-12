@@ -9,7 +9,7 @@ import {
   SfooterSecondDiv,
 } from './SFooter.styled';
 import { SFooterListUl } from './SFooter.styled';
-
+import { FormattedMessage } from 'react-intl';
 export function Footer() {
   return (
     <SFooter>
@@ -24,17 +24,22 @@ export function Footer() {
           </SFooterLogoA>
           <SFooterListUl>
             <li>
-              <SListA>About</SListA>
+              <SListA>
+                <FormattedMessage id='About' />
+              </SListA>
             </li>
             <li>
-              <SListA>Contact</SListA>
+              <SListA>
+                <FormattedMessage id='Contact' />
+              </SListA>
             </li>
           </SFooterListUl>
         </SfooterSecondDiv>
         <SfooterHr />
         <SFooterSpan>
           © 2023
-          <SFooterSpanA>Flowbite™</SFooterSpanA>. All Rights Reserved.
+          <p></p>
+          <FormattedMessage id='All Rights Reserved.' />
         </SFooterSpan>
       </SDIvContainer>
     </SFooter>

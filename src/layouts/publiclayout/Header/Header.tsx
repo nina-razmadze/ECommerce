@@ -1,12 +1,20 @@
-import { lazy } from 'react';
-import { GrCart } from 'react-icons/gr';
+import { SCartIcon, SCartP, SContactUS, SSearchInput } from './SHeader.styled';
+import { STranslateSelect, SPrimaryButton } from './SHeader.styled';
 
-import { FaSearch } from 'react-icons/fa';
-import { FaRegUser } from 'react-icons/fa';
+import GroceryCart from '.././../../images/grocery-cart.png';
+import { LocaleContext } from '@src/contexts/LocaleContext';
 
-import { useState, useEffect, useRef } from 'react';
-import Button from '@src/components/Button/PrimaryButton';
-import { SMainContainer } from '@src/components/SMainContainer';
+import { useGetProducts } from '@src/hooks/useGetProducts';
+import { SSimplyBtn, SHeaderNav } from './SHeader.styled';
+
+import { CartContext } from '@src/contexts/CartContext';
+import { Language } from '../../../types/localstorage';
+import { CartModal } from '@src/components/CartModal';
+
+import { FormattedMessage } from 'react-intl';
+import { useContext, useState } from 'react';
+
+import { Link } from 'react-router-dom';
 
 import {
   SListUl,
@@ -15,30 +23,9 @@ import {
   SAuthButtons,
   SdivContainer,
 } from './SHeader.styled';
-
-import { useContext } from 'react';
+import MyFavoritesView from '@src/views/UserView/MyFavoritesView/MyFavoritesView';
 import Search from './Search/Search';
-import { Link } from 'react-router-dom';
-import { SCartP } from './SHeader.styled';
-import { SCartIcon } from './SHeader.styled';
-import { SHeaderNav } from './SHeader.styled';
-import { SSimplyBtn } from './SHeader.styled';
-import { FormattedMessage } from 'react-intl';
-import { CartModal } from '@src/components/CartModal';
-import { SSearchInput } from './SHeader.styled';
-import { SPrimaryButton } from './SHeader.styled';
-import { STranslateSelect } from './SHeader.styled';
-import { Language } from '../../../types/localstorage';
-import { SContactUS } from './SHeader.styled';
-import { LocaleContext } from '@src/contexts/LocaleContext';
-import GroceryCart from '.././../../images/grocery-cart.png';
-import { CartContext } from '@src/contexts/CartContext';
-import { useGetProducts } from '@src/hooks/useGetProducts';
-import UserView from '@src/views/UserView/UserView';
-
 export function Header() {
-  const { cartItem, setCartItem } = useContext(CartContext);
-
   const [cartModal, setcartModal] = useState<boolean>(false);
   const { locale, setLocale } = useContext(LocaleContext);
   const {
@@ -49,11 +36,17 @@ export function Header() {
     <>
       <SHeaderNav>
         <SdivContainer>
-          <Search />
+          {/* <SSearchInput placeholder='Search' /> */}
 
+          <Search />
+          <Link to='/'>
+            <SLogoSpan>EShop</SLogoSpan>
+          </Link>
           <SAuthButtons>
             <Link to='/Contact'>
-              <SContactUS>Contact</SContactUS>
+              <SContactUS>
+                <FormattedMessage id='Contact' />
+              </SContactUS>
             </Link>
 
             <STranslateSelect
@@ -73,7 +66,9 @@ export function Header() {
             </STranslateSelect>
 
             <Link to='/user'>
-              <div className='pr-[24px]'>My page</div>
+              <div className='pr-[24px]'>
+                <FormattedMessage id='My page' />
+              </div>
             </Link>
 
             <SSimplyBtn onClick={() => setcartModal(true)}>
@@ -82,16 +77,15 @@ export function Header() {
               </SCartIcon>
 
               <SCartP>
-                <FormattedMessage id='cart' />
+                <FormattedMessage id='Cart' />
               </SCartP>
             </SSimplyBtn>
 
-            <CartModal
-              cartItem={cartItem}
-              open={cartModal}
-              onClose={() => setcartModal(false)}
-            />
-
+            <CartModal open={cartModal} onClose={() => setcartModal(false)} />
+            {/* <MyFavoritesView
+              open={favorite}
+              onClose={() => setFavorite(false)}
+            /> */}
             <Link to='/auth/login'>
               <SPrimaryButton>
                 <FormattedMessage id='Log in' />
@@ -99,10 +93,6 @@ export function Header() {
             </Link>
           </SAuthButtons>
         </SdivContainer>
-
-        <Link to='/'>
-          <SLogoSpan>EShop</SLogoSpan>
-        </Link>
       </SHeaderNav>
     </>
   );

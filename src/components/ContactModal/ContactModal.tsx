@@ -1,5 +1,6 @@
 import { IFormInput } from '@src/contexts/ContactContext';
 import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 export type ContactModalProps = {
   open: boolean;
@@ -33,7 +34,7 @@ export default function ContactModal({
             <div className='relative bg-zinc-800 rounded-lg shadow dark:bg-gray-700'>
               <div className='flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600'>
                 <h3 className='text-xl font-semibold text-gray-900 dark:text-white text-white font-mono pt-[6px]'>
-                  Your Info Already Sent
+                  <FormattedMessage id='Your Info Already Sent' />
                 </h3>
 
                 <button
@@ -54,16 +55,24 @@ export default function ContactModal({
                       clipRule='evenodd'
                     ></path>
                   </svg>
-                  <span className='sr-only '>Close modal</span>
+                  <span className='sr-only '>
+                    <FormattedMessage id='Close modal' />
+                  </span>
                 </button>
               </div>
 
               <div className='p-6 space-y-4  text-[17px] grid grid-cols-2  gap-x-0.5	 items-center  text-white pb-[90px]'>
-                <h1>FirstName :</h1>
+                <h1>
+                  <FormattedMessage id='First Name :' />
+                </h1>
                 <h1>{formData.firstName}</h1>
-                <h1>LastName :</h1>
+                <h1>
+                  <FormattedMessage id='Last Name :' />
+                </h1>
                 <h1>{formData.lastName}</h1>
-                <h1>Phone number : </h1>
+                <h1>
+                  <FormattedMessage id='Phone number :' />
+                </h1>
                 <h1>{formData.number}</h1>
               </div>
 

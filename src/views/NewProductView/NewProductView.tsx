@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import AdminView from '../AdminView/AdminView';
 import { Link } from 'react-router-dom';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface IFormInput {
   productName: string;
@@ -14,10 +15,11 @@ interface IFormInput {
   category: string;
   description: any;
   price: number;
-  weight: number;
+  brand: string;
 }
 
 export default function NewProductView() {
+  const intl = useIntl();
   const { register, handleSubmit, reset, resetField } = useForm<IFormInput>();
   const [postRequest, setPostRequest] = useState('');
   const [productData, setProductData] = useState('');
@@ -31,6 +33,7 @@ export default function NewProductView() {
         price: data.price,
         category: data.category,
         description: data.description,
+        brand: data.brand,
       })
       .then((response) => {
         console.log(response);
@@ -50,50 +53,58 @@ export default function NewProductView() {
 
   const handleOpenProduct = () => {
     setOpenProduct(true);
-    console.log(openProduct);
+    console.log('dfv');
   };
 
   return (
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='pt-[95px] text-white  bg-zinc-800 grid justify-center'
+        className='pt-[73px] text-white  bg-zinc-800 grid justify-center'
       >
         <div className='flex'>
           <h1 className='text-[28px] text-white pb-[30px] pt-[25px] '>
-            Add a new Product
+            <FormattedMessage id='Add A New Product' />
           </h1>
-          <Link to='/adminView '>
+          {/* <Link to='/adminView'>
             <h1
               className='text-[25px] pt-[30px] pl-[100px]'
               onClick={handleOpenProduct}
             >
-              Products
+              <FormattedMessage id='Products' />
             </h1>
           </Link>
-          <AdminView open={openProduct} data={register} />
+          <AdminView open={openProduct} data={register} /> */}
         </div>
         <div>
           <label className='text-white text-[20px] block mb-2'>
-            Product Name
+            <FormattedMessage id='Product Name' />
           </label>
           <SProductInput {...register('productName', { required: true })} />
         </div>
         <div className=' text-white text-[20px] grid grid-cols-2'>
           <div>
-            <label className='block mb-2'>color</label>
+            <label className='block mb-2'>
+              <FormattedMessage id='Color' />
+            </label>
             <SSecondProductInput {...register('color', { required: true })} />
           </div>
           <div>
-            <label className='block mb-2'>Item Weight (kg)</label>
-            <SSecondProductInput {...register('weight', { required: true })} />
+            <label className='block mb-2'>
+              <FormattedMessage id='Brand' />
+            </label>
+            <SSecondProductInput {...register('brand', { required: true })} />
           </div>
           <div>
-            <label className='block mb-1'>Price</label>
+            <label className='block mb-1'>
+              <FormattedMessage id='Price' />
+            </label>
             <SSecondProductInput {...register('price', { required: true })} />
           </div>
           <div>
-            <label className='block mb-1'>Category</label>
+            <label className='block mb-1'>
+              <FormattedMessage id='Category' />
+            </label>
             <SSecondProductInput
               {...register('category', { required: true })}
             />
@@ -101,7 +112,7 @@ export default function NewProductView() {
         </div>
         <div>
           <label className='block mb-2 text-white text-[20px]'>
-            Description
+            <FormattedMessage id='Description' />
           </label>
           <SDescriptionInput {...register('description', { required: true })} />
         </div>
@@ -109,7 +120,9 @@ export default function NewProductView() {
           <input
             className='bg-purple-700  ml-[20px] text-white text-[20px] p-[10px] w-[200px] h-[50px] rounded-lg'
             type='submit'
-            value='Submit'
+            value={intl.formatMessage({
+              id: 'Submit',
+            })}
           />
 
           <div className='text-[22px] text-purple-600 pt-[10px]' role='alert'>

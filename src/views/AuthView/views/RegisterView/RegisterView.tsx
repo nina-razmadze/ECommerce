@@ -39,28 +39,30 @@ type TregisterForm = {
 export default function RegisterView() {
   const { formatMessage } = useIntl();
   const [created, setCreated] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm<TregisterForm>();
 
   async function handleRegister(data: TregisterForm) {
-    console.log(data);
     try {
-      const resp = await publicAxios.post(
-        `
-      /register`,
-        data
-      );
+      const resp = await publicAxios.post(`/register`, data);
+
       if (resp.data?.id) {
         setCreated(true);
+        setValueEmpty();
       }
     } catch (error: any) {
       setError('root', { message: error.response.data.errors?.[0].msg });
     }
   }
+  const setValueEmpty = () => {
+    reset();
+  };
 
   return (
     <>
@@ -164,7 +166,7 @@ export default function RegisterView() {
                   </Link>
                 </SAuthDoesNotAccaunt>
                 {created && (
-                  <p className=' mt-2 text-green-700'>
+                  <p className='mt-2 text-green-700'>
                     <FormattedMessage id='User created successfully' />
                   </p>
                 )}

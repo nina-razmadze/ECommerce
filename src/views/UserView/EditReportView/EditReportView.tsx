@@ -16,6 +16,7 @@ import girlAvatar from '../../../images/girlAvatar.jpg';
 import boyAvatar from '../../../images/boyAvatar.jpg';
 import defaultAvatar from '../../../images/defaultAvatar.jpg';
 import axios from 'axios';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 enum GenderEnum {
   female = 'female',
@@ -31,6 +32,7 @@ interface IFormInput {
 }
 
 export default function EditReportView() {
+  const intl = useIntl();
   const [isInputValid, setIsInputValid] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
   const [avatarImage, setAvatarImage] = useState();
@@ -65,27 +67,6 @@ export default function EditReportView() {
     setValueEmpty();
   };
 
-  function validateAndSubmit(
-    firstName: string,
-    lastName: string,
-    password: any,
-    email: any,
-    gender: string
-  ) {
-    if (
-      firstName === '' ||
-      lastName === '' ||
-      password === '' ||
-      email === '' ||
-      gender === ''
-    ) {
-      setIsInputValid(false);
-    } else {
-      setIsInputValid(true);
-      handleSubmit(onSubmit)();
-    }
-  }
-
   function setValueEmpty() {
     reset();
   }
@@ -115,18 +96,23 @@ export default function EditReportView() {
             src={defaultAvatar}
           />
         )}
-
         <div className='pt-[15px] text-[25px] pl-[20px] flex'>
-          <h1 className='pr-[17px]'> {firstName || 'First Name'}</h1>
-          <h1>{lastName || 'Last Name'}</h1>
+          <h1 className='pr-[17px]'>
+            {firstName || <FormattedMessage id='First Name' />}
+          </h1>
+          <h1>{lastName || <FormattedMessage id='Last Name' />}</h1>
         </div>
       </SUser>
 
       <SForm onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label>First Name</label>
+          <label>
+            <FormattedMessage id='First Name' />
+          </label>
           <SInput
-            placeholder='First Name'
+            placeholder={intl.formatMessage({
+              id: 'First Name',
+            })}
             {...register('firstName', { required: true })}
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -134,9 +120,13 @@ export default function EditReportView() {
         </div>
 
         <div>
-          <label>Last Name</label>
+          <label>
+            <FormattedMessage id='Last Name' />
+          </label>
           <SInput
-            placeholder='Last Name'
+            placeholder={intl.formatMessage({
+              id: 'Last Name',
+            })}
             {...register('lastName', { required: true })}
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -144,15 +134,21 @@ export default function EditReportView() {
         </div>
 
         <div>
-          <label>Email</label>
+          <label>
+            <FormattedMessage id='Email' />
+          </label>
           <SInput
-            placeholder='Email'
+            placeholder={intl.formatMessage({
+              id: 'Email',
+            })}
             {...register('email', { required: true })}
           />
         </div>
 
         <div>
-          <label>Password</label>
+          <label>
+            <FormattedMessage id='Password' />
+          </label>
           <SInput
             type='password'
             id='password'
@@ -162,21 +158,30 @@ export default function EditReportView() {
         </div>
 
         <SSelectDiv>
-          <label className='pl-[20px]'>Gender Selection</label>
+          <label className='pl-[20px]'>
+            <FormattedMessage id='Gender Selection' />
+          </label>
           <SSelect
             {...(register('gender'), { required: true })}
             value={selectedValue}
             onChange={(e) => setSelectedValue(e.target.value)}
           >
             <SOption></SOption>
-            <SOption value={GenderEnum.female}>female</SOption>
-            <SOption value={GenderEnum.male}>male</SOption>
+            <SOption value={GenderEnum.female}>
+              <FormattedMessage id='female' />
+            </SOption>
+            <SOption value={GenderEnum.male}>
+              <FormattedMessage id='male' />
+            </SOption>
           </SSelect>
         </SSelectDiv>
 
         <SSubmitButton
-          className='pt-[40px] pb-[40px] cursor-pointer '
+          className='pt-[40px] pb-[40px] cursor-pointer'
           type='submit'
+          value={intl.formatMessage({
+            id: 'Submit',
+          })}
         />
       </SForm>
     </SDivContainer>

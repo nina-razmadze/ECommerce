@@ -1,6 +1,7 @@
-import { SPurpleButton } from '../ContactView/SContactView.styled';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { SPurpleButton } from '../ContactView/SContactView.styled';
 
 import {
   SForm,
@@ -23,26 +24,38 @@ interface TFormInput {
   address: string;
 }
 export default function PeymentView() {
-  const { register, handleSubmit } = useForm<TFormInput>();
-  const onSubmit: SubmitHandler<TFormInput> = (data) => console.log(data);
-
+  const { register, handleSubmit, reset } = useForm<TFormInput>();
   const [physicalPerson, setPhysicalPerson] = useState('');
   const [legalEntity, setLegalEntity] = useState('');
+  const intl = useIntl();
 
-  function physical(e: any) {
+  const onSubmit: SubmitHandler<TFormInput> = (data) => {
+    setValueEmpty();
+    alert('Your Order has approved');
+  };
+
+  const setValueEmpty = () => {
+    reset();
+    setLegalEntity('');
+    setPhysicalPerson('');
+  };
+
+  function handlePhysicalClick(e: any) {
     e.preventDefault();
     if (physicalPerson === '') {
-      setPhysicalPerson('Physical person');
-    } else if (physicalPerson === 'Physical person') {
+      setPhysicalPerson(intl.formatMessage({ id: 'Physical Person' }));
+    } else if (
+      physicalPerson === intl.formatMessage({ id: 'Physical Person' })
+    ) {
       setPhysicalPerson('');
     }
   }
 
-  function legal(e: any) {
+  function handleLegalClick(e: any) {
     e.preventDefault();
     if (legalEntity === '') {
-      setLegalEntity('Legal Entity');
-    } else if (legalEntity === 'Legal Entity') {
+      setLegalEntity(intl.formatMessage({ id: 'Legal Entity' }));
+    } else if (legalEntity === intl.formatMessage({ id: 'Legal Entity' })) {
       setLegalEntity('');
     }
   }
@@ -50,37 +63,55 @@ export default function PeymentView() {
   return (
     <SBackGroundColor>
       <SForm onSubmit={handleSubmit(onSubmit)}>
-        <STitle>Order Details</STitle>
+        <STitle>
+          <FormattedMessage id='Order Details' />
+        </STitle>
 
         <SFirstSelect
           {...register('payment', {
-            required: true,
+            required: 'Payment is required',
           })}
         >
-          <option> Method of payment</option>
-          <option value='Paying with points'> Paying with points</option>
-          <option value='Payment by card'>Payment by card</option>
+          <option value=''>
+            <FormattedMessage id='Method Of Payments' />
+          </option>
+
+          <option value='Paying with points'>
+            <FormattedMessage id='Paying with Points' />
+          </option>
+
+          <option value='Payment by card'>
+            <FormattedMessage id='Payment By Card' />
+          </option>
         </SFirstSelect>
 
         <SLineInput
           value={physicalPerson || legalEntity}
-          {...register('person', {
-            required: 'This field is required',
-          })}
+          {...register('person', { required: true })}
         />
 
         <SButtonContainer>
-          <SButton onClick={physical}>Physical person</SButton>
-          <SButton onClick={legal}>legal entity</SButton>
+          <SButton onClick={handlePhysicalClick}>
+            <FormattedMessage id='Physical Person' />
+          </SButton>
+          <SButton onClick={handleLegalClick}>
+            <FormattedMessage id='Legal Entity' />
+          </SButton>
         </SButtonContainer>
 
         <SSecondInput
-          placeholder=' Add an address'
+          placeholder={intl.formatMessage({ id: 'Add An Address' })}
           {...register('address', {
             required: true,
           })}
+          className='custom-input placeholder-white bg-zinc-800'
         />
-        <SPurpleButton type='submit'></SPurpleButton>
+
+        <SPurpleButton
+          type='submit'
+          placeholder={intl.formatMessage({ id: 'Submit' })}
+          className='custom-input placeholder-white bg-zinc-800'
+        ></SPurpleButton>
       </SForm>
     </SBackGroundColor>
   );

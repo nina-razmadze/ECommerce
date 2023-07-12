@@ -6,7 +6,7 @@ export const SBackGroundColor = styled.div`
 `;
 
 export const SForm = styled.form`
-  ${tw`bg-zinc-800 flex	justify-center items-center flex-col pt-[197px] pb-[66px]  `}
+  ${tw`bg-zinc-800 flex	justify-center items-center flex-col pt-[197px] pb-[46px]  `}
 `;
 
 export const STitle = styled.h1`
@@ -22,7 +22,7 @@ export const SLineInput = styled.input`
 `;
 
 export const SButtonContainer = styled.div`
-  ${tw`flex space-x-[40px] mr-[230px] mb-[50px]  `}
+  ${tw`flex space-x-[40px] mr-[230px] mb-[50px] items-center `}
 `;
 
 export const SButton = styled.button`

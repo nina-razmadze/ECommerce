@@ -5,16 +5,11 @@ import { ProductContext } from '@src/contexts/ProductContext';
 import { BsFillSuitHeartFill } from 'react-icons/bs';
 import { AiFillEdit } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-
-export interface CardProps {
-  id: any;
-  desc: string;
-  price: string;
-  title: string;
-  images: string[];
-  category: string;
-  product: number | string;
-}
+import { FormattedMessage } from 'react-intl';
+import { FavProductContext } from '@src/contexts/FavProductContext';
+import { CardData } from '@src/views/ProductView/ProductView';
+import { CardProps } from '@src/App';
+import { useNavigate } from 'react-router-dom';
 
 export function Card({
   desc,
@@ -26,44 +21,61 @@ export function Card({
   category,
 }: CardProps) {
   const { cartItem, setCartItem } = useContext(CartContext);
-  const [isFavorite, setIsFavorite] = useState(false);
-  // const { productInfo, setProductInfo } = useContext(ProductContext);
+  const navigate = useNavigate();
+  const { favProduct, setFavProduct } = useContext(FavProductContext);
+
   const onSubmit: SubmitHandler<CardProps> = (data) => {
     setCartItem((prev) => [...prev, data]);
   };
-
+  // const handleSubmit: SubmitHandler<CardProps> = (data) => {
+  //   setCartItem((prev) => [...prev, data]);
+  // };
   const handleClick = () => {
-    onSubmit({ price, title, images, desc, id, product, category });
+    const itemExists = cartItem.some((item) => item.id === id);
+    if (itemExists) {
+      alert('Item already in cart');
+    } else {
+      onSubmit({ price, title, images, desc, id, product, category });
+      alert('Item added to cart');
+    }
   };
 
-  // ---------------------------------------------------
-  // const onClick: SubmitHandler<Product> = (data) => {
-  //   setProductInfo(exampleProduct);
-  // };
+  const handleFavoriteClick = () => {
+    const itemAlreadyExists = favProduct.some((item) => item.id === id);
+    if (itemAlreadyExists) {
+      alert('Item already in Favorite Products');
+    } else {
+      const favoriteData: CardProps = {
+        price,
+        title,
+        images,
+        desc,
+        id,
+        product,
+        category,
+      };
+      setFavProduct((prev) => [...prev, favoriteData]);
+      alert('Item added in Favorite Products');
 
-  // const handleCardClick = () => {
-  //   const newProductInfo: Product = {
-  //     category: '',
-  //     product: '',
-  //     title: title,
-  //   };
-
-  //   setProductInfo(newProductInfo);
-  // };
+      console.log(favProduct);
+    }
+  };
 
   return (
     <>
       {images.map((image, index) => (
         <div
           key={id}
-          className=' max-w-sm cursor-pointer hover:opacity-70 	w-[275px] border	 rounded-lg border-gray-200 overflow-hidden shadow-lg'
+          className=' max-w-sm cursor-pointer hover:opacity-70 	w-[275px] border-x-0		 rounded-lg border-gray-200 overflow-hidden '
         >
           <a href='#'>
-            <img
-              className='w-full h-[180px] object-cover opacity-100 transition-opacity duration-300 '
-              src={image}
-              alt={`Image ${index + 1}`}
-            />
+            <Link to={`/products/${id}`}>
+              <img
+                className='w-full h-[180px] object-cover opacity-100 transition-opacity duration-300 '
+                src={image}
+                alt={`Image ${index + 1}`}
+              />
+            </Link>
           </a>
           <div className='px-5 pb-5 bg-purple-700'>
             <a href='#'>
@@ -132,12 +144,12 @@ export function Card({
               </span>
               <button
                 onClick={handleClick}
-                className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-[100px]'
               >
-                Add to cart
+                <FormattedMessage id='Add to cart' />
               </button>
               <button>
-                <BsFillSuitHeartFill onClick={handleClick} />
+                <BsFillSuitHeartFill onClick={handleFavoriteClick} />
               </button>
             </div>
           </div>

@@ -8,7 +8,7 @@ import { SSecondInput } from './SContactView.styled';
 import { SPurpleButton } from './SContactView.styled';
 import { lazy, useContext } from 'react';
 import { ContactContext } from '@src/contexts/ContactContext';
-
+import { FormattedMessage, useIntl } from 'react-intl';
 const AuthHeader = lazy(
   () => import('@src/layouts/AuthLayout/AuthHeader/AuthHeader')
 );
@@ -20,6 +20,7 @@ interface IFormInput {
 }
 
 export default function ContactView() {
+  const intl = useIntl();
   const { formData, setFormData } = useContext(ContactContext);
   const [contactModal, setContactModal] = useState<boolean>(false);
   const [isInputValid, setIsInputValid] = useState(false);
@@ -56,7 +57,6 @@ export default function ContactView() {
   }
   return (
     <SBackGround>
-      <AuthHeader />
       <SForm onSubmit={handleSubmit(onSubmit)}>
         <SInput
           {...register('firstName', {
@@ -64,14 +64,14 @@ export default function ContactView() {
             maxLength: 20,
             minLength: 2,
           })}
-          placeholder='First Name'
+          placeholder={intl.formatMessage({ id: 'First Name' })}
         />
         <SSecondInput
           {...register('lastName', {
             required: true,
             pattern: /^[A-Za-z]+$/i,
           })}
-          placeholder='Last Name'
+          placeholder={intl.formatMessage({ id: 'Last Name' })}
         />
         <SInput
           {...register('number', {
@@ -79,10 +79,14 @@ export default function ContactView() {
             minLength: 9,
             maxLength: 18,
           })}
-          placeholder='Phone Number'
+          placeholder={intl.formatMessage({ id: 'Phone Number' })}
         />
 
-        <SPurpleButton type='submit' onClick={validateAndSubmit} />
+        <SPurpleButton
+          type='submit'
+          value={intl.formatMessage({ id: 'Submit' })}
+          onClick={validateAndSubmit}
+        />
       </SForm>
 
       <ContactModal

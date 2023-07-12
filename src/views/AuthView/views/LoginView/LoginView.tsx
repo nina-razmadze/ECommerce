@@ -48,6 +48,7 @@ export default function loginView() {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm<TInputs>();
 
@@ -55,6 +56,7 @@ export default function loginView() {
     try {
       const resp = await publicAxios.post(`/auth/login`, data);
       if (resp.data.accesToken) {
+        // private_axios.defaults.headers.common.Authorization = `Bearer ${resp.data.accessToken}`;
         localStorage.setItem(TlogaclStorage.ACCESSTOKEN, resp.data.accessToken);
         setStatus(TAuthorizationStage.AUTHORIZED);
       }
@@ -63,6 +65,9 @@ export default function loginView() {
     }
   };
 
+  const setValueEmpty = () => {
+    reset();
+  };
   return (
     //ardagviweros romeli inputia araswori
     <SAuthSection>

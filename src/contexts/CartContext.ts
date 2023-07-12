@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { CardProps } from '@src/components/Card/Card';
+import { CardProps } from '@src/views/ProductView/ProductView';
 
 interface CartContextValue {
   cartItem: CardProps[];

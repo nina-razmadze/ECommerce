@@ -3,18 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { ProductContext } from '@src/contexts/ProductContext';
 import { useContext } from 'react';
 import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
+
+export interface Product {
+  category: string;
+  title: string;
+  price: number;
+  description: string;
+  color: string;
+  brand: string;
+}
+interface CardData {
+  id: number;
+  title: string;
+  images: string[];
+  price: string;
+  description: string;
+  category: string;
+  product: string | number;
+}
 
 export default function EditProductView() {
-  interface CardData {
-    id: number;
-    title: string;
-    images: string[];
-    price: string;
-    description: string;
-    category: string;
-    product: string | number;
-  }
-
   const [data, setData] = useState<CardData[]>([]);
   const [offset, setOffset] = useState(0);
   const navigate = useNavigate();
@@ -55,11 +64,12 @@ export default function EditProductView() {
 
   const handleUpdateClick = (data: any) => {
     setProductInfo({
-      category: 'smartPhones',
+      category: data.category,
       title: data.title,
       price: data.price,
       description: data.description,
       color: data.color,
+      brand: data.brand,
     });
     navigate('/editProductForm');
   };
@@ -85,26 +95,26 @@ export default function EditProductView() {
     <div className='bg-zinc-800 mx-auto '>
       <div className='bg-zinc-800'>
         <h1 className='text-[28px] text-white pt-[80px] pl-[200px]'>
-          Products
+          <FormattedMessage id='Products' />
         </h1>
         <div className='text-white pt-[60px] pb-[104px] m-auto w-[80%] relative overflow-x-auto shadow-md sm:rounded-lg'>
           <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
             <thead className='text-[16px] text-white uppercase bg-gray-50 dark:bg-gray-700 bg-purple-700'>
               <tr>
                 <th scope='col' className='px-6 py-7'>
-                  Title
+                  <FormattedMessage id='Title' />
                 </th>
                 <th scope='col' className='px-6 py-7'>
-                  Category
+                  <FormattedMessage id='Category' />
                 </th>
                 <th scope='col' className='px-6 py-7'>
-                  Price
+                  <FormattedMessage id='Price' />
                 </th>
                 <th scope='col' className='px-6 py-7'>
-                  Action
+                  <FormattedMessage id='Action' />
                 </th>
                 <th scope='col' className='px-6 py-7'>
-                  Action
+                  <FormattedMessage id='Action' />
                 </th>
               </tr>
             </thead>
@@ -132,7 +142,7 @@ export default function EditProductView() {
                         href='#'
                         className=' text-[20px] font-medium text-white dark:text-blue-500 hover:underline 	'
                       >
-                        Edit
+                        <FormattedMessage id='Edit' />
                       </a>
                     </button>
                     {/* </Link> */}
@@ -143,7 +153,7 @@ export default function EditProductView() {
                         href='#'
                         className=' text-[18px] font-medium text-white dark:text-blue-500 hover:underline 	'
                       >
-                        Delete
+                        <FormattedMessage id='Delete' />
                       </a>
                     </button>
                   </td>

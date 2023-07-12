@@ -20,7 +20,7 @@ export const SInput = styled.input`
   ${tw`bg-zinc-600 text-[20px] w-[260px] m-[20px] h-[50px] rounded-3xl 	p-[18px]	`}
 `;
 export const SSubmitButton = styled.input`
-  ${tw`bg-purple-900 text-[20px] w-[260px] ml-[17px] mt-[30px]  p-[10px] h-[50px] rounded-3xl			`}
+  ${tw`bg-purple-900 text-[20px] w-[260px] ml-[17px] mt-[30px] pl-[22px] p-[10px] h-[50px] rounded-3xl			`}
 `;
 export const SSelectDiv = styled.div`
   ${tw`bg-zinc-600 text-[20px] w-[260px] ml-[17px] mt-[30px]  p-[10px]  h-[50px] rounded-3xl	cursor-pointer	flex 	`}
@@ -29,5 +29,5 @@ export const SRightInputs = styled.input`
   ${tw`text-[20px] `}
 `;
 export const SDivContainer = styled.div`
-  ${tw`bg-zinc-800 grid justify-center   `}
+  ${tw`bg-zinc-800 grid justify-center    `}
 `;

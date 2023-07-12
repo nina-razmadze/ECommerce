@@ -1,35 +1,36 @@
-import test from '../../images/test.jpg';
-import { useContext, useState } from 'react';
-import { SCartItem } from './CartModal.styled';
-import { SCartImgWrapper } from './CartModal.styled';
 import { CartContext } from '@src/contexts/CartContext';
-import { Link } from 'react-router-dom';
+import { SCartImgWrapper } from './CartModal.styled';
 
-export interface CardProps {
-  id: any;
-  desc: string;
-  price: string;
-  title: string;
-  images: string[];
-}
+import { useNavigate } from 'react-router-dom';
+import { SCartItem } from './CartModal.styled';
+
+import { FormattedMessage } from 'react-intl';
+import { useContext, useState } from 'react';
 
 type CartModalProps = {
   open: boolean;
   onClose: () => void;
-  cartItem: CardProps;
 };
 
 export function CartModal({ open, onClose }: CartModalProps) {
   const { cartItem, setCartItem } = useContext(CartContext);
-  const [linkClicked, setLinkClicked] = useState(false);
+  const navigate = useNavigate();
 
   const removeItem = (id: any) => {
     const updatedCart = cartItem.filter((index) => index !== id);
     setCartItem(updatedCart);
   };
+
   const handleCloseClick = () => {
-    onClose();
+    if (cartItem.length === 0) {
+      alert('Your cart is empty');
+      onClose();
+    } else {
+      onClose();
+      navigate('/pay');
+    }
   };
+
   if (open) {
     return (
       <>
@@ -45,7 +46,7 @@ export function CartModal({ open, onClose }: CartModalProps) {
             <div className='relative bg-zinc-800 rounded-lg shadow dark:bg-gray-700 '>
               <div className='flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600'>
                 <h3 className='text-xl font-semibold text-gray-900 dark:text-white text-white font-mono'>
-                  Your Cart
+                  <FormattedMessage id='Your Cart' />
                 </h3>
 
                 <button
@@ -67,11 +68,13 @@ export function CartModal({ open, onClose }: CartModalProps) {
                       clip-rule='evenodd'
                     ></path>
                   </svg>
-                  <span className='sr-only '>Close modal</span>
+                  <span className='sr-only'>
+                    <FormattedMessage id='Close modal' />
+                  </span>
                 </button>
               </div>
 
-              <div className=' pt-[30px] space-y-6'>
+              <div className='pt-[30px] space-y-6'>
                 {cartItem.map((item, id) => (
                   <SCartItem key={id}>
                     <SCartImgWrapper>
@@ -81,11 +84,17 @@ export function CartModal({ open, onClose }: CartModalProps) {
                       ></img>
                     </SCartImgWrapper>
                     <div className='text-[18px] pr-[30px]  pl-[20px]'>
-                      <h1 className='pb-[25px]'>Title : {item.title}</h1>
-                      <p>description : good Telephone</p>
+                      <h1 className='pb-[25px]'>
+                        <FormattedMessage id='Title :' /> {item.title}
+                      </h1>
+                      <p>
+                        <FormattedMessage id='description : good Telephone' />
+                      </p>
                     </div>
                     <div className='pr-[10px] text-[25px]'>
-                      <h1>Price : $ {item.price}</h1>
+                      <h1>
+                        <FormattedMessage id='Price : $' /> {item.price}
+                      </h1>
                     </div>
                     <button
                       onClick={() => removeItem(item)}
@@ -106,23 +115,26 @@ export function CartModal({ open, onClose }: CartModalProps) {
                           clip-rule='evenodd'
                         ></path>
                       </svg>
-                      <span className='sr-only '>Close modal</span>
+                      <span className='sr-only'>
+                        <FormattedMessage id='Close modal' />
+                      </span>
                     </button>
                   </SCartItem>
                 ))}
               </div>
 
-              <div className='flex justify-end items-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600'>
-                <Link to='/pay'>
-                  <button
-                    onClick={handleCloseClick}
-                    data-modal-hide='defaultModal'
-                    type='button'
-                    className='text-gray-500 bg-purple-600 text-zinc-800 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-white-200 text-sm font-medium px-5 py-2.5 hover:bg-transparent hover:text-purple-600 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 '
-                  >
-                    Buy Now
-                  </button>
-                </Link>
+              <div className='flex justify-between items-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600'>
+                <div className='pb-[8px] text-[18px] text-white'>
+                  <FormattedMessage id='You need to register to buy something' />
+                </div>
+                <button
+                  onClick={handleCloseClick}
+                  data-modal-hide='defaultModal'
+                  type='button'
+                  className='text-gray-500 bg-purple-600 text-zinc-800 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-white-200 text-sm font-medium px-5 py-2.5 hover:bg-transparent hover:text-purple-600 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 '
+                >
+                  <FormattedMessage id='Buy Now' />
+                </button>
               </div>
             </div>
           </div>
