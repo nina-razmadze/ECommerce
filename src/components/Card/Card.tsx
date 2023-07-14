@@ -27,9 +27,7 @@ export function Card({
   const onSubmit: SubmitHandler<CardProps> = (data) => {
     setCartItem((prev) => [...prev, data]);
   };
-  // const handleSubmit: SubmitHandler<CardProps> = (data) => {
-  //   setCartItem((prev) => [...prev, data]);
-  // };
+
   const handleClick = () => {
     const itemExists = cartItem.some((item) => item.id === id);
     if (itemExists) {
@@ -56,8 +54,6 @@ export function Card({
       };
       setFavProduct((prev) => [...prev, favoriteData]);
       alert('Item added in Favorite Products');
-
-      console.log(favProduct);
     }
   };
 

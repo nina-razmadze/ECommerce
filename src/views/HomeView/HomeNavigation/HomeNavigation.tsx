@@ -14,6 +14,10 @@ import { BsCameraFill } from 'react-icons/bs';
 import { IoMdList } from 'react-icons/io';
 
 export default function HomeNavigation() {
-  return <SHomeNavigation className='font-sans'></SHomeNavigation>;
+  return (
+    <SHomeNavigation className='pt-[170px] pl-[80px] text-[50px] font-serif  skew-x-[-25deg] '>
+      E shop
+    </SHomeNavigation>
+  );
 }
 // 1

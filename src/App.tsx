@@ -35,7 +35,7 @@ const NewProductView = lazy(
 export interface CardProps {
   id: any;
   desc: string;
-  price: number;
+  price: string;
   title: string;
   images: string[];
   category: string;
@@ -54,7 +54,14 @@ function App() {
             <Route element={<PublicLayouts />}>
               <Route path='/' element={<div>Authorized</div>} />
               <Route path='*' element={<Navigate to='/' />} />
-
+            </Route>
+          </Routes>
+        );
+      }
+      case TAuthorizationStage.UNAUTHORIZED: {
+        return (
+          <Routes>
+            <Route element={<PublicLayouts />}>
               <Route
                 path='/editProduct'
                 element={
@@ -99,14 +106,6 @@ function App() {
                 }
               />
               <Route path='/pay' element={<PeymentView />} />
-            </Route>
-          </Routes>
-        );
-      }
-      case TAuthorizationStage.UNAUTHORIZED: {
-        return (
-          <Routes>
-            <Route element={<PublicLayouts />}>
               <Route path='/products/:id' element={<ProductView />} />
               <Route path='/contact' element={<ContactView />} />
 

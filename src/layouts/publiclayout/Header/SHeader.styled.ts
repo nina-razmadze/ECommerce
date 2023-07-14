@@ -8,7 +8,7 @@ export const SHeaderNav = styled.nav`
   ${tw` bg-zinc-800  px-4  py-2.5 fixed   top-0 left-0 w-full bg-white  z-20  mx-auto 	`}
 `;
 export const SAuthButtons = styled.div`
-  ${tw`flex justify-around items-center lg:order-2 bg-transparent border-none mr-[20px]`}
+  ${tw`flex justify-around items-center lg:order-2 bg-transparent border-none mr-[20px]  absolute top-[20px] left-[55%] `}
 `;
 export const SLoginButton = styled.button`
   ${tw` text-white  bg-zinc-800  dark:bg-zinc-600   border-none	 hover:bg-zinc-600 focus:bg-zinc-600 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2  focus:outline-none 	`}
@@ -28,7 +28,7 @@ export const SCartP = styled.p`
 `;
 
 export const SdivContainer = styled.div`
-  ${tw`flex text-white font-[17px] flex-wrap justify-between items-center mx-auto w-[82%] xl:w-[80%] lg:w-[620px] md:w-[512px] sm:w-[420px] 	 `}
+  ${tw`flex text-white font-[17px] flex-wrap justify-between items-center mx-auto  mr-[13%] w-[80%] xl:w-[80%] lg:w-[620px] md:w-[512px] sm:w-[420px] 	 `}
 `;
 export const SListUl = styled.ul`
   ${tw`flex flex-col items-center mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 list-none`}
@@ -38,7 +38,7 @@ export const SPrimaryButton = styled.button`
 `;
 
 export const SLogoSpan = styled.span`
-  ${tw` text-white pl-[20px] absolute top-[20px] left-[50%] self-center text-xl font-semibold whitespace-nowrap dark:text-white`}
+  ${tw` text-white pl-[20px] absolute top-[20px] left-[45%] self-center text-xl font-semibold whitespace-nowrap dark:text-white`}
 `;
 export const STranslateSelect = styled.select`
   ${tw`border-none mr-[24px]  px-3 py-2 cursor-pointer bg-transparent text-white hover:bg-zinc-600  rounded-lg items-center`}

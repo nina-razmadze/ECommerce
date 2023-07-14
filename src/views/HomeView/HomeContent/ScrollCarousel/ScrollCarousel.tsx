@@ -49,34 +49,56 @@ export function ScrollCarousel() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [offset]);
 
+  const filteredData = data.filter((product) => {
+    const productTitle = product.title.toLowerCase();
+    const inputValue = search.title.toLowerCase();
+    return productTitle.startsWith(inputValue.charAt(0));
+  });
   return (
+    // <div>
+    //   <div>
+    // {search ? (
+    //   <>
+    //     {filteredData.map((product: any) => (
+    //       <div>
+    //         <Card
+    //           id={product.id}
+    //           key={product.id}
+    //           title={product.title}
+    //           desc={product.description}
+    //           images={product.images}
+    //           category={product.category}
+    //           price={product.price}
+    //           product={product.product}
+    //         />
+    //       </div>
+    //     ))}
+    //   </>
+    // ) : (
     <div className='w-4/5 mx-auto pt-[150px] grid grid-cols-4 gap-y-[60px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {data
-        // .filter((product) => {
-        //   console.log(product.title);
-
-        //   return search.title === ''
-        //     ? product
-        //     : product.title.includes(search.title);
-        // })
-        .map((product) => {
-          return (
-            <div className='cursor-pointer  bg-purple-700	w-[275px] max-h-[345px] border	 rounded-lg border-gray-200 overflow-hidden shadow-lg'>
-              {/* <Link to={`/products/${product.id}`}> */}
-              <Card
-                id={product.id}
-                key={product.id}
-                title={product.title}
-                desc={product.description}
-                images={product.images}
-                category={product.category}
-                price={product.price}
-                product={product.product}
-              />
-              {/* </Link> */}
-            </div>
-          );
-        })}
+      {data.map((product) => (
+        <div
+          className='cursor-pointer bg-purple-700 w-[275px] max-h-[345px] border rounded-lg border-gray-200 overflow-hidden shadow-lg'
+          key={product.id}
+        >
+          <Card
+            id={product.id}
+            key={product.id}
+            title={product.title}
+            desc={product.description}
+            images={product.images}
+            category={product.category}
+            price={product.price}
+            product={product.product}
+          />
+        </div>
+      ))}
     </div>
   );
 }
+{
+  /* </div>
+    </div> */
+}
+//   );
+// }
