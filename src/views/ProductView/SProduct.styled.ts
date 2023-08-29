@@ -1,8 +1,8 @@
-import tw from 'twin.macro';
-import styled from 'styled-components';
+import tw from "twin.macro";
+import styled from "styled-components";
 
 export const SProductViewBackground = styled.div`
-  ${tw` bg-zinc-800 pb-[33px]  pt-[142px] text-white  `}
+  ${tw` bg-zinc-900 pb-[50px]  pt-[150px] text-white  `}
 `;
 export const SProductViewImageDiv = styled.div`
   ${tw`   flex  h-[498px] w-[500px] rounded-xl  `}

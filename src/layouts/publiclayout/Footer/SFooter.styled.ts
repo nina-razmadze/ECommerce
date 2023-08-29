@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const SFooter = styled.footer`
-  ${tw` bg-zinc-800 shadow  `}
+  ${tw` bg-zinc-900 shadow  `}
 `;
 export const SDIvContainer = styled.div`
   ${tw`w-full max-w-screen-xl mx-auto p-4 md:py-8`}

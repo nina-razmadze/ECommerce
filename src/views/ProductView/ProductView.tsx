@@ -1,24 +1,21 @@
-import { SProductViewBackground } from './SProduct.styled';
-import { SProductViewContainer } from './SProduct.styled';
-import { SProductViewImageDiv } from './SProduct.styled';
-import { SProductViewInfoContainer } from './SProduct.styled';
-import watch from '../../images/watch.jpg';
-import { SProductViewInfoTitle } from './SProduct.styled';
-import { SProductViewInfoContainerSecond } from './SProduct.styled';
-import { SProductViewInfoniscription } from './SProduct.styled';
-import { SProductViewInfoMoreImages } from './SProduct.styled';
-import { SProductViewInfonNormiscription } from './SProduct.styled';
-import ProductNav from './ProductNavigation/ProductNav';
-import { useContext } from 'react';
-import { CartContext } from '@src/contexts/CartContext';
-import { ProductContext } from '@src/contexts/ProductContext';
-import { FormattedMessage } from 'react-intl';
-import { useEffect, useState } from 'react';
-import phone1 from '../../images/download.jpg';
-import phone2 from '../../images/tele.jpg';
-import phone3 from '../../images/images.jpg';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { SProductViewBackground } from "./SProduct.styled";
+import { SProductViewContainer } from "./SProduct.styled";
+import { SProductViewImageDiv } from "./SProduct.styled";
+import { SProductViewInfoContainer } from "./SProduct.styled";
+import watch from "../../images/watch.jpg";
+import { SProductViewInfoTitle } from "./SProduct.styled";
+import { SProductViewInfoContainerSecond } from "./SProduct.styled";
+import { SProductViewInfoniscription } from "./SProduct.styled";
+import { SProductViewInfoMoreImages } from "./SProduct.styled";
+import { SProductViewInfonNormiscription } from "./SProduct.styled";
+import ProductNav from "./ProductNavigation/ProductNav";
+import { FormattedMessage } from "react-intl";
+import { useEffect, useState } from "react";
+import phone1 from "../../images/download.jpg";
+import phone2 from "../../images/tele.jpg";
+import phone3 from "../../images/images.jpg";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export interface CardProps {
   id: any;
@@ -39,11 +36,6 @@ export interface CardData {
   product: string | number;
 }
 
-// export interface Product {
-//   category: string;
-//   product: number | string;
-//   title: string;
-// }
 export interface NavProps {
   cartItem: CardProps;
 }
@@ -75,35 +67,25 @@ export default function ProductView() {
       <SProductViewContainer>
         <SProductViewInfoContainerSecond>
           <SProductViewInfoTitle>{data.title}</SProductViewInfoTitle>
-          {/* <SProductViewInfoniscription>
-            <FormattedMessage id='Screen Size :' />
-          </SProductViewInfoniscription> */}
+
           <SProductViewInfoniscription>
             {data.category}
           </SProductViewInfoniscription>
           <SProductViewInfoMoreImages>
-            <img className='w-[100px] h-[120px]' src={phone1}></img>
-            <img className='w-[100px] h-[120px]' src={phone2}></img>
-            <img className='w-[100px]  h-[120px]' src={phone3}></img>
+            <img className="w-[100px] h-[120px]" src={phone1}></img>
+            <img className="w-[100px] h-[120px]" src={phone2}></img>
+            <img className="w-[100px]  h-[120px]" src={phone3}></img>
           </SProductViewInfoMoreImages>
         </SProductViewInfoContainerSecond>
         <SProductViewImageDiv>
-          {/* {data?.images?.map((image: any, index: any) => (
-            <img
-              className='w-[400px]'
-              src={image.source}
-              alt={`Product Image ${index}`}
-              key={index}
-            />
-          ))} */}
-          <img src={watch} className='w-[400px]'></img>
+          <img src={watch} className="w-[400px]"></img>
         </SProductViewImageDiv>
         <SProductViewInfoContainer>
           <SProductViewInfonNormiscription>
-            <FormattedMessage id='Price' /> ---------------- {data.price}
-            <FormattedMessage id='Gel' />
+            <FormattedMessage id="Price" /> ---------------- {data.price}
+            <FormattedMessage id="Gel" />
           </SProductViewInfonNormiscription>
-          <div className='pt-[160px] '> ----- {data.description}</div>
+          <div className="pt-[160px] "> ----- {data.description}</div>
         </SProductViewInfoContainer>
       </SProductViewContainer>
     </SProductViewBackground>

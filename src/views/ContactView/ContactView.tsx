@@ -1,16 +1,16 @@
-import ContactModal from '@src/components/ContactModal/ContactModal';
-import { SBackGround } from './SContactView.styled';
-import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { SForm } from './SContactView.styled';
-import { SInput } from './SContactView.styled';
-import { SSecondInput } from './SContactView.styled';
-import { SPurpleButton } from './SContactView.styled';
-import { lazy, useContext } from 'react';
-import { ContactContext } from '@src/contexts/ContactContext';
-import { FormattedMessage, useIntl } from 'react-intl';
+import ContactModal from "@src/components/ContactModal/ContactModal";
+import { SBackGround } from "./SContactView.styled";
+import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { SForm } from "./SContactView.styled";
+import { SInput } from "./SContactView.styled";
+import { SSecondInput } from "./SContactView.styled";
+import { SPurpleButton } from "./SContactView.styled";
+import { lazy, useContext } from "react";
+import { ContactContext } from "@src/contexts/ContactContext";
+import { FormattedMessage, useIntl } from "react-intl";
 const AuthHeader = lazy(
-  () => import('@src/layouts/AuthLayout/AuthHeader/AuthHeader')
+  () => import("@src/layouts/AuthLayout/AuthHeader/AuthHeader")
 );
 
 interface IFormInput {
@@ -25,8 +25,6 @@ export default function ContactView() {
   const [contactModal, setContactModal] = useState<boolean>(false);
   const [isInputValid, setIsInputValid] = useState(false);
 
-  // console.log(formData);
-
   const { register, handleSubmit, setValue, resetField } =
     useForm<IFormInput>();
 
@@ -37,9 +35,9 @@ export default function ContactView() {
   };
 
   function setValueEmpty() {
-    resetField('firstName');
-    resetField('lastName');
-    resetField('number');
+    resetField("firstName");
+    resetField("lastName");
+    resetField("number");
   }
 
   function handleModalClose() {
@@ -48,7 +46,7 @@ export default function ContactView() {
 
   function validateAndSubmit() {
     const { firstName, lastName, number } = formData;
-    if (firstName === '' || lastName === '' || number === '') {
+    if (firstName === "" || lastName === "" || number === "") {
       setIsInputValid(false);
     } else {
       setIsInputValid(true);
@@ -59,32 +57,32 @@ export default function ContactView() {
     <SBackGround>
       <SForm onSubmit={handleSubmit(onSubmit)}>
         <SInput
-          {...register('firstName', {
+          {...register("firstName", {
             required: true,
             maxLength: 20,
             minLength: 2,
           })}
-          placeholder={intl.formatMessage({ id: 'First Name' })}
+          placeholder={intl.formatMessage({ id: "First Name" })}
         />
         <SSecondInput
-          {...register('lastName', {
+          {...register("lastName", {
             required: true,
             pattern: /^[A-Za-z]+$/i,
           })}
-          placeholder={intl.formatMessage({ id: 'Last Name' })}
+          placeholder={intl.formatMessage({ id: "Last Name" })}
         />
         <SInput
-          {...register('number', {
+          {...register("number", {
             required: true,
             minLength: 9,
             maxLength: 18,
           })}
-          placeholder={intl.formatMessage({ id: 'Phone Number' })}
+          placeholder={intl.formatMessage({ id: "Phone Number" })}
         />
 
         <SPurpleButton
-          type='submit'
-          value={intl.formatMessage({ id: 'Submit' })}
+          type="submit"
+          value={intl.formatMessage({ id: "Submit" })}
           onClick={validateAndSubmit}
         />
       </SForm>

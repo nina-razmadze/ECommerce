@@ -55,26 +55,6 @@ export function ScrollCarousel() {
     return productTitle.startsWith(inputValue.charAt(0));
   });
   return (
-    // <div>
-    //   <div>
-    // {search ? (
-    //   <>
-    //     {filteredData.map((product: any) => (
-    //       <div>
-    //         <Card
-    //           id={product.id}
-    //           key={product.id}
-    //           title={product.title}
-    //           desc={product.description}
-    //           images={product.images}
-    //           category={product.category}
-    //           price={product.price}
-    //           product={product.product}
-    //         />
-    //       </div>
-    //     ))}
-    //   </>
-    // ) : (
     <div className='w-4/5 mx-auto pt-[150px] grid grid-cols-4 gap-y-[60px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
       {data.map((product) => (
         <div

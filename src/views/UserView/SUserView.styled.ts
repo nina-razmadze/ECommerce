@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import tw from 'twin.macro';
-import { CartModal } from '@src/components/CartModal';
+import styled from "styled-components";
+import tw from "twin.macro";
+import { CartModal } from "@src/components/CartModal";
 export const SBackColor = styled.div`
-  ${tw`bg-zinc-800   pt-[194px] pb-[54px]`}
+  ${tw`bg-zinc-900   pt-[194px] pb-[54px]`}
 `;
 
 export const SColumn = styled.div`

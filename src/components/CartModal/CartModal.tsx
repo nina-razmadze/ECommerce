@@ -132,7 +132,7 @@ export function CartModal({ open, onClose }: CartModalProps) {
                   onClick={handleCloseClick}
                   data-modal-hide="defaultModal"
                   type="button"
-                  className="text-gray-500 bg-purple-600 text-zinc-800 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-white-200 text-sm font-medium px-5 py-2.5 hover:bg-transparent hover:text-purple-600 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 "
+                  className="text-gray-500 bg-purple-600 text-zinc-800 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-white-200 text-sm font-medium px-5 py-2.5 hover:bg-transparent hover:text-purple-600  dark:text-gray-300  dark:hover:text-white dark:hover:bg-gray-600  "
                 >
                   <FormattedMessage id="Buy Now" />
                 </button>
