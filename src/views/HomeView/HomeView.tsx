@@ -1,8 +1,8 @@
-import { lazy, Suspense } from 'react';
-import { SearchProduct } from './searchProduct';
+import React, { lazy, Suspense } from "react";
+import { SearchProduct } from "./searchProduct";
 
-const HomeNavigation = lazy(() => import('./HomeNavigation'));
-const HomeContent = lazy(() => import('./HomeContent'));
+const HomeNavigation = lazy(() => import("./HomeNavigation"));
+const HomeContent = lazy(() => import("./HomeContent"));
 
 export default function HomeView() {
   return (

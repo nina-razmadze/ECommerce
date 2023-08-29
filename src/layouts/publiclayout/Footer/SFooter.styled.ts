@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import tw from 'twin.macro';
+import styled from "styled-components";
+import tw from "twin.macro";
 
 export const SFooter = styled.footer`
-  ${tw`bg-zinc-800 shadow dark:bg-gray-900 `}
+  ${tw` bg-zinc-800 shadow  `}
 `;
 export const SDIvContainer = styled.div`
   ${tw`w-full max-w-screen-xl mx-auto p-4 md:py-8`}

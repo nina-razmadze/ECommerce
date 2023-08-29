@@ -1,5 +1,4 @@
 import { IFormInput } from '@src/contexts/ContactContext';
-import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 export type ContactModalProps = {

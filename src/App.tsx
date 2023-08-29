@@ -1,35 +1,34 @@
-import { AuthContext, TAuthorizationStage } from './contexts/AuthContext';
-import PriviteRoute from './components/PriviteRoute/PriviteRoute';
-import { lazy, Suspense, useCallback, useContext } from 'react';
+import { AuthContext, TAuthorizationStage } from "./contexts/AuthContext";
+import PriviteRoute from "./components/PriviteRoute/PriviteRoute";
+import { lazy, Suspense, useCallback, useContext } from "react";
 
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { GlobalContext } from './contexts/GlobalContext';
-import { PublicLayouts } from './layouts/publiclayout';
+import { Route, Routes, Navigate } from "react-router-dom";
+import { GlobalContext } from "./contexts/GlobalContext";
+import { PublicLayouts } from "./layouts/publiclayout";
 
-import { TUser_Role_Enum } from './types/user.types';
-import UserView from './views/UserView/UserView';
+import { TUser_Role_Enum } from "./types/user.types";
+import UserView from "./views/UserView/UserView";
 
 const EditProductForm = lazy(
-  () => import('./views/EditProductView/EditProductViewForm/EditProductForm')
+  () => import("./views/EditProductView/EditProductViewForm/EditProductForm")
 );
-const ContactView = lazy(() => import('./views/ContactView/ContactView'));
-const PeymentView = lazy(() => import('./views/PaymentView/PeymentView'));
+const ContactView = lazy(() => import("./views/ContactView/ContactView"));
+const PeymentView = lazy(() => import("./views/PaymentView/PeymentView"));
 
-const AdminView = lazy(() => import('./views/AdminView/AdminView'));
+const AdminView = lazy(() => import("./views/AdminView/AdminView"));
 const EditReportView = lazy(
-  () => import('./views/UserView/EditReportView/EditReportView')
+  () => import("./views/UserView/EditReportView/EditReportView")
 );
 
-const ProductsView = lazy(() => import('./views/ProductsView'));
-const ProductView = lazy(() => import('./views/ProductView'));
+const ProductView = lazy(() => import("./views/ProductView"));
 const EditProductView = lazy(
-  () => import('./views/EditProductView/EditProductView')
+  () => import("./views/EditProductView/EditProductView")
 );
 
-const HomeView = lazy(() => import('./views/HomeView'));
-const AuthView = lazy(() => import('./views/AuthView'));
+const HomeView = lazy(() => import("./views/HomeView"));
+const AuthView = lazy(() => import("./views/AuthView"));
 const NewProductView = lazy(
-  () => import('./views/NewProductView/NewProductView')
+  () => import("./views/NewProductView/NewProductView")
 );
 
 export interface CardProps {
@@ -52,8 +51,8 @@ function App() {
         return (
           <Routes>
             <Route element={<PublicLayouts />}>
-              <Route path='/' element={<div>Authorized</div>} />
-              <Route path='*' element={<Navigate to='/' />} />
+              <Route path="/" element={<div>Authorized</div>} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Route>
           </Routes>
         );
@@ -63,7 +62,7 @@ function App() {
           <Routes>
             <Route element={<PublicLayouts />}>
               <Route
-                path='/editProduct'
+                path="/editProduct"
                 element={
                   currentUser.role === TUser_Role_Enum.ADMIN ? (
                     <PriviteRoute
@@ -72,13 +71,13 @@ function App() {
                       children={<EditProductView />}
                     />
                   ) : (
-                    <Navigate to='/' />
+                    <Navigate to="/" />
                   )
                 }
               />
 
               <Route
-                path='/newProduct'
+                path="/newProduct"
                 element={
                   currentUser.role === TUser_Role_Enum.ADMIN ? (
                     <PriviteRoute
@@ -87,12 +86,12 @@ function App() {
                       children={<NewProductView />}
                     />
                   ) : (
-                    <Navigate to='/' />
+                    <Navigate to="/" />
                   )
                 }
               />
               <Route
-                path='/editProductForm'
+                path="/editProductForm"
                 element={
                   currentUser.role === TUser_Role_Enum.ADMIN ? (
                     <PriviteRoute
@@ -101,18 +100,18 @@ function App() {
                       children={<EditProductForm />}
                     />
                   ) : (
-                    <Navigate to='/' />
+                    <Navigate to="/" />
                   )
                 }
               />
-              <Route path='/pay' element={<PeymentView />} />
-              <Route path='/products/:id' element={<ProductView />} />
-              <Route path='/contact' element={<ContactView />} />
+              <Route path="/pay" element={<PeymentView />} />
+              <Route path="/products/:id" element={<ProductView />} />
+              <Route path="/contact" element={<ContactView />} />
 
-              <Route path='/user' element={<UserView />} />
-              <Route path='/' element={<HomeView />} />
+              <Route path="/user" element={<UserView />} />
+              <Route path="/" element={<HomeView />} />
             </Route>
-            <Route path='/auth/*' element={<AuthView />} />
+            <Route path="/auth/*" element={<AuthView />} />
           </Routes>
         );
       }

@@ -1,11 +1,11 @@
-import tw from 'twin.macro';
-import styled from 'styled-components';
+import tw from "twin.macro";
+import styled from "styled-components";
 
 export const SLoginLink = styled.link`
   ${tw`no-underline`}
 `;
 export const SHeaderNav = styled.nav`
-  ${tw` bg-zinc-800  px-4  py-2.5 fixed   top-0 left-0 w-full bg-white  z-20  mx-auto 	`}
+  ${tw` bg-zinc-900  px-4  py-2.5 fixed   top-0 left-0 w-full bg-white  z-20  mx-auto 	`}
 `;
 export const SAuthButtons = styled.div`
   ${tw`flex justify-around items-center lg:order-2 bg-transparent border-none mr-[20px]  absolute top-[20px] left-[55%] `}
@@ -34,7 +34,7 @@ export const SListUl = styled.ul`
   ${tw`flex flex-col items-center mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 list-none`}
 `;
 export const SPrimaryButton = styled.button`
-  ${tw`text-white bg-purple-600 hover:bg-purple-700	focus:ring-4  focus:ring-purple-900 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:bg-zinc-600   border-none `}
+  ${tw`text-white bg-purple-600 hover:bg-purple-700	focus:ring-4  focus:ring-purple-900 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2   border-none `}
 `;
 
 export const SLogoSpan = styled.span`
