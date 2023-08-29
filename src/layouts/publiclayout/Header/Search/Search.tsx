@@ -1,8 +1,8 @@
-import { CardData } from '@src/views/ProductView/ProductView';
-import { SSearchInput } from '../SHeader.styled';
-import { Card } from '@src/components/Card';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { CardData } from "@src/views/ProductView/ProductView";
+import { SSearchInput } from "../SHeader.styled";
+import { Card } from "@src/components/Card";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export interface Product {
   id: number;
@@ -15,9 +15,8 @@ export interface Product {
 }
 
 export default function Search() {
-  // const { search, setSearch } = useContext(SearchContext);
   const [data, setData] = useState<Product[]>([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios
@@ -47,15 +46,15 @@ export default function Search() {
       <SSearchInput
         value={search}
         onChange={handleSearchChange}
-        placeholder='Search'
+        placeholder="Search"
       />
-      <div className='grid grid-cols-4 row-2 pb-[10px]'>
+      <div className="grid grid-cols-4 row-2 pb-[10px]">
         {search && (
           <>
             {filteredData.map((product) => (
               <div
                 key={product.id}
-                className='cursor-pointer bg-purple-700 w-[275px] max-h-[345px] border rounded-lg border-gray-200 mr-[50px] mt-[70px] overflow-hidden shadow-lg'
+                className="cursor-pointer bg-purple-700 w-[275px] max-h-[345px] border rounded-lg border-gray-200 mr-[50px] mt-[70px] overflow-hidden shadow-lg"
               >
                 <Card
                   id={product.id}
