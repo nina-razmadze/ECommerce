@@ -33,5 +33,5 @@ Our eCommerce application is powered by a carefully curated stack of cutting-edg
 
 - **react-router-dom**: With the help of react-router-dom, our application seamlessly navigates between views and gracefully handles client-side routing, providing a fluid user journey.
 
-- **win.macro**: For optimizing our bundle size, win.macro intelligently manages conditional imports, tailoring our app's performance to the specific platform, whether it's Windows or macOS.
+- **twin.macro**: For optimizing our bundle size, win.macro intelligently manages conditional imports, tailoring our app's performance to the specific platform, whether it's Windows or macOS.
 
