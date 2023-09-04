@@ -6,7 +6,7 @@
 
 The E-Commerce App is a cutting-edge online shopping platform that empowers users to browse, purchase, and manage a wide range of products from the comfort of their devices. With a user-friendly interface, secure payment options, and a vast product catalog, our app provides a seamless shopping experience for both customers and merchants.
 
-<h1 style="font-size:larger;" >Features✨</h1>
+<h1 style="font-size:larger;" >Features ✨</h1>
 
 - Product Catalog: Explore an extensive selection of products across various categories.
 - User Accounts: Create and manage personal profiles for a tailored shopping experience.
