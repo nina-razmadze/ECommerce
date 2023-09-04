@@ -14,3 +14,24 @@ The E-Commerce App is a cutting-edge online shopping platform that empowers user
 - Search & Filters: Easily find products with advanced search and filter options.
 - Wishlist: Save your favorite items for future reference.
 - Seller Dashboard: For merchants, manage products, orders, and sales effortlessly.
+
+<h1 style="font-size:larger;">Technologies Utilized 🖥</h1>
+
+Our eCommerce application is powered by a carefully curated stack of cutting-edge technologies, each playing a pivotal role in delivering a robust and feature-rich user experience:
+
+- **React**: At the core of our front-end, React stands as the foundation of our dynamic, component-based user interface, ensuring smooth and responsive interactions.
+
+- **Typescript**: We've harnessed the power of Typescript to enhance code quality and maintainability, providing a statically typed safety net for our development process.
+
+- **Npm**: As our trusty package manager, Npm seamlessly orchestrates the installation of dependencies and the execution of project scripts, keeping our workflow organized and efficient.
+
+- **Tailwind CSS**: Our design flourishes thanks to Tailwind CSS, a utility-first framework that simplifies styling and facilitates rapid prototyping without sacrificing flexibility.
+
+- **Ant Design**: The Ant Design library augments our application with an extensive suite of customizable UI components, elevating the user experience to a new level of sophistication.
+
+- **Axios - React Query**: Leveraging Axios for efficient network requests and React Query for seamless data fetching and state management, we ensure that our app communicates effortlessly with the server.
+
+- **react-router-dom**: With the help of react-router-dom, our application seamlessly navigates between views and gracefully handles client-side routing, providing a fluid user journey.
+
+- **win.macro**: For optimizing our bundle size, win.macro intelligently manages conditional imports, tailoring our app's performance to the specific platform, whether it's Windows or macOS.
+
