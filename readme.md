@@ -1,6 +1,6 @@
-  <h1 style="font-size:larger;" > 🛍️ E-commerence </h1>
-
-![Screenshot of my App]()
+  <h1 style="font-size:larger;" > 🛍️ E-commerence</h1>
+  
+![Screenshot of my App](https://github.com/nina-razmadze/ECommerce/assets/123087063/ea096a9e-8e28-4343-b26d-67f93eb58878)
 
 <h1 style="font-size:larger;" >Description 📋</h1>
 
