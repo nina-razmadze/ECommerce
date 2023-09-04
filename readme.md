@@ -15,6 +15,8 @@ The E-Commerce App is a cutting-edge online shopping platform that empowers user
 - Wishlist: Save your favorite items for future reference.
 - Seller Dashboard: For merchants, manage products, orders, and sales effortlessly.
 
+
+
 <h1 style="font-size:larger;">Technologies Utilized 🖥</h1>
 
 Our eCommerce application is powered by a carefully curated stack of cutting-edge technologies, each playing a pivotal role in delivering a robust and feature-rich user experience:
@@ -33,5 +35,7 @@ Our eCommerce application is powered by a carefully curated stack of cutting-edg
 
 - **react-router-dom**: With the help of react-router-dom, our application seamlessly navigates between views and gracefully handles client-side routing, providing a fluid user journey.
 
-- **twin.macro**: For optimizing our bundle size, win.macro intelligently manages conditional imports, tailoring our app's performance to the specific platform, whether it's Windows or macOS.
+- **twin.macro**: For optimizing our bundle size, twin.macro intelligently manages conditional imports, tailoring our app's performance to the specific platform, whether it's Windows or macOS.
+
+Each of these technologies has been thoughtfully selected and integrated to create a comprehensive, efficient, and visually appealing eCommerce experience. Together, they represent the cornerstone of our app's technological prowess.
 
