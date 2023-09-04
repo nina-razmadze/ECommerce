@@ -11,9 +11,6 @@ The E-Commerce App is a cutting-edge online shopping platform that empowers user
 - Product Catalog: Explore an extensive selection of products across various categories.
 - User Accounts: Create and manage personal profiles for a tailored shopping experience.
 - Secure Checkout: Enjoy safe and convenient payment options for your orders.
-- Order Tracking: Keep tabs on your purchases with real-time order status updates.
-- Product Reviews: Share your feedback and read reviews from fellow shoppers.
 - Search & Filters: Easily find products with advanced search and filter options.
 - Wishlist: Save your favorite items for future reference.
-- Notifications: Stay informed about promotions, discounts, and order updates.
 - Seller Dashboard: For merchants, manage products, orders, and sales effortlessly.
